@@ -1,0 +1,5 @@
+- if model.errors.present?
+  .errors.alert.alert-danger
+    - for error in model.errors.full_messages
+      = error
+      br

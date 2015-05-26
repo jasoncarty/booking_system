@@ -1,0 +1,2 @@
+span#remove.event-action-icon
+  = link_to "<i class='glyphicon glyphicon-minus'>".html_safe, event_attendee_path(event_attendee_id), method: :delete, data: {remote: 'true', confirm: 'Are you sure?'}

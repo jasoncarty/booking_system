@@ -1,0 +1,228 @@
+@import "application"
+
+$text: rgb(111, 110, 110)
+// GENERAL STYLING
+*
+  box-sizing: border-box
+
+.spacer-25
+  margin-top: 25px
+
+.spacer-15
+  margin-top: 15px
+
+.btn-dark
+  background: rgb(36, 35, 35)
+  color: #fff
+  border-radius: 0
+  box-shadow: 1px 1px 5px #898984
+  width: 100%
+
+.btn-blue
+  background: #4285F4
+  color: #fff
+  border-radius: 0
+  box-shadow: 1px 1px 5px #898984
+  width: 100%
+
+.form-control
+  border-radius: 0
+
+.select2-container.form-control
+  padding: 0
+  border: none
+  background-image: none
+  border-radius: 0
+  height: 34px
+  line-height: 34px
+  .select2-choices
+    border: none
+    background-image: none
+    padding: 6px 12px
+    height: 34px !important
+    .select2-search-choice
+      margin: 0
+    .select2-search-field input
+      padding: 0 5px
+  .select2-choice
+    height: 34px
+    line-height: 34px
+    border-radius: 0
+    border: none
+    background-image: none
+    .select2-arrow
+      border-radius: 0
+
+
+body
+  background: rgb(194, 192, 192)
+  min-height: 100%
+  color: rgb(111, 110, 110)
+  h1, h2, h3, 
+    font-weight: 100
+  h4, h5, h6
+    font-weight: 200
+  font-weight: 300  
+
+// NAV
+.navbar
+  display: flex
+  align-items: center
+  background: rgb(36, 35, 35)
+  height: 56px
+  width: 100%
+  left: 0
+  top: 0
+  z-index: 1
+  box-shadow: 1px 1px 25px rgb(34, 34, 32)
+  border-radius: 0
+  padding: 0 30px
+  .menu-opener
+    width: 25px
+    cursor: pointer
+    .icon-bar
+      display: block
+      border-top: 2px solid rgba(255,255,255, 0.5)
+      transition: border-top 0.5s
+      margin-bottom: 4px
+    &:last-child
+      margin-bottom: 0 
+    &:hover .icon-bar
+      border-top: 2px solid rgba(255,255,255, 1)
+      transition: border-top 0.5s
+  .nav-right
+    position: absolute
+    right: 30px
+    .user
+      position: relative
+      top: 8px
+      img
+        border-radius: 40px
+        width: 40px
+  .branding
+    color: #fff
+    text-align: center
+    h2
+      margin-top: 10px
+    a
+      color: #fff
+      text-decoration: none
+      &:hover
+        color: #fff
+        text-decoration: none
+
+// MENU
+.menu
+  position: fixed
+  top: 56px
+  left: -226px    
+  width: 226px
+  height: 100%
+  overflow-y: auto
+  box-shadow: 1px 1px 25px #898984
+  background: #fff
+  padding-top: 20px
+  z-index: 1
+  ul
+    list-style: none
+    padding-left: 0
+    overflow: hidden
+    float: left
+    display: block
+    width: 100%
+    li
+      width: 100%
+      float: left
+      a
+        display: block
+        padding: 20px 12px
+        font-weight: bold
+        color: $text
+        text-decoration: none
+        &:hover
+          text-decoration: none
+    li.active
+      background: #E5E5E5
+
+// MAIN
+.main
+  padding-bottom: 80px
+
+// ATTENDEES LIST
+ul.event-attendees
+  list-style: none
+  padding-left: 0
+  overflow: hidden
+  margin-bottom: 0
+  li.event-attendee
+    width: 50px
+    float: left
+    display: inline-block
+    img
+      border-radius: 40px
+      width: 40px
+      margin: auto
+      
+// Events
+.event
+  background: #fff
+  padding: 15px
+  width: 100%
+  margin-bottom: 30px
+  box-shadow: 1px 1px 10px rgb(195, 195, 191)
+  position: relative
+  
+  .go-to-event-button
+    position: absolute
+    z-index: 1
+    bottom: 15px
+    right: 15px
+    background: #000
+    text-align: center
+    border-radius: 25px
+    height: 25px
+    width: 25px
+    padding-top: 3px
+    cursor: pointer
+    .glyphicon
+      font-size: 14px
+      color: #fff
+
+// USERS
+.main
+  .user
+    background: #fff
+    padding: 15px
+    width: 100%
+    margin-bottom: 30px
+    box-shadow: 1px 1px 10px rgb(195, 195, 191)
+    position: relative
+    overflow: hidden
+    clear: both
+    .user-img
+      img
+        width: 60px
+        border-radius: 60px
+        float: left
+        margin-right: 15px
+    .user-details
+      float: left
+      width: 80%
+    .user-link
+      position: absolute
+      z-index: 1
+      bottom: 15px
+      right: 15px
+      background: #000
+      text-align: center
+      border-radius: 25px
+      height: 25px
+      width: 25px
+      padding-top: 3px
+      cursor: pointer
+      .glyphicon
+        font-size: 14px
+        color: #fff
+  
+
+@import "responsive"

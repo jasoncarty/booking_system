@@ -1,0 +1,5 @@
+<% if @success %>
+  html = "<%= j render 'single_event_attendee', attendee: @attendee %>";
+  $('ul.event-attendees').append(html);
+  $('#event-actions .actions').html("<%= j render '/public/events/event_action_remove', event_attendee_id: @attendee.id %>")
+<% end %>

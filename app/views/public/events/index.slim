@@ -1,0 +1,17 @@
+#event-container
+  h1 Events
+
+  - @events.each do |event|
+
+    .event
+      
+      h4 = event.name
+      p = event.description
+      p
+        b = "Start: #{event.starts_at.strftime '%y-%m-%d %H:%M'}"
+      ul.event-attendees
+        - event.event_attendees.each do |attendee|
+          li.event-attendee data-attendee="#{attendee.id}"
+            = image_tag avatar_url(attendee.user, 40), alt: attendee.user.name
+      .go-to-event-button
+        = link_to "<icon class='glyphicon glyphicon-chevron-right'></i>".html_safe, show_event_events_path(event)

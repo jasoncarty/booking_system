@@ -1,0 +1,6 @@
+<% if @success %>
+  $("[data-attendee='<%= @attendee.id %>']").fadeOut(300, function(){
+    $(this).remove();
+  });
+  $('#event-actions .actions').html("<%= j render '/public/events/event_action_add', event: @event %>")
+<% end %>

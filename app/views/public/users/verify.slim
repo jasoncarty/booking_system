@@ -1,0 +1,29 @@
+.well.log-in
+  h1 Golf Booking System
+  h2 Complete registration
+  p Almost done, just fill in this form.
+
+  = form_tag user_verification_path
+    - if @errors
+      .form-group  
+        .alert.alert-danger
+          - for error in @errors.full_messages
+            = error
+            br
+    - elsif @error
+      .form-group  
+        .alert.alert-danger
+          = @error
+
+    .form-group
+      = text_field_tag "user[email]", "", class: 'form-control', placeholder: 'Email'
+
+    .form-group
+      = password_field_tag "user[password]", "", class: 'form-control', placeholder: 'Password'
+
+    .form-group
+      = password_field_tag "user[password_confirmation]", "", class: 'form-control', placeholder: 'Confirm password'
+      = hidden_field_tag "verfication_token", params[:token].nil? ? @token : params[:token]
+
+    .form-group
+      = submit_tag "Save", class: 'btn btn-blue'

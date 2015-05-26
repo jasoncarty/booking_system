@@ -1,0 +1,377 @@
+@import "application"
+
+$text: rgb(111, 110, 110)
+$blue: #4285F4
+$red: #D4402B
+$green: #009A57
+$yellow: #FFB800
+// GENERAL STYLING
+*
+  box-sizing: border-box
+
+.btn-blue
+  background: $blue
+  color: #fff
+  border-radius: 0
+  box-shadow: 1px 1px 5px #898984
+  width: 100%
+
+.form-control
+  border-radius: 0
+
+.spacer-25
+  margin-top: 25px
+
+// NOT LOGGED IN
+body.not-logged-in
+  background: $blue
+  min-height: 100%
+  color: rgb(111, 110, 110)
+  .container.not-logged-in
+    width: 40%
+
+  .well
+    background: #ECECEC
+    box-shadow: 1px 1px 25px rgb(20, 35, 58)
+    border-radius: 0
+
+  // LOG IN FORM  
+  .well.log-in
+    margin-top: 50%
+    h1, h4
+      text-align: center
+    h1
+      margin-top: 0
+    ::-webkit-input-placeholder
+      text-align: center
+    :-moz-placeholder
+      text-align: center
+    ::-moz-placeholder
+      text-align: center
+    :-ms-input-placeholder
+      text-align: center
+
+
+// LOGGED IN
+body
+  background: #ECECEC
+  min-height: 100%
+  color: rgb(111, 110, 110)
+  h1, h2, h3, 
+    font-weight: 100
+  h4, h5, h6
+    font-weight: 200
+  font-weight: 300  
+
+// NAV
+.navbar
+  display: flex
+  align-items: center
+  background: $blue
+  height: 56px
+  width: 100%
+  left: 0
+  top: 0
+  z-index: 1
+  box-shadow: 1px 1px 25px #898984
+  border-radius: 0
+  padding: 0 30px
+  .menu-opener
+    width: 25px
+    cursor: pointer
+    .icon-bar
+      display: block
+      border-top: 2px solid rgba(255,255,255, 0.5)
+      transition: border-top 0.5s
+      margin-bottom: 4px
+    &:last-child
+      margin-bottom: 0 
+    &:hover .icon-bar
+      border-top: 2px solid rgba(255,255,255, 1)
+      transition: border-top 0.5s
+  .nav-right
+    position: absolute
+    right: 30px
+    .user
+      position: relative
+      top: 8px
+      img
+        border-radius: 40px
+        width: 40px
+  .branding
+    color: #fff
+    text-align: center
+    h2
+      margin-top: 10px
+    a
+      color: #fff
+      text-decoration: none
+      &:hover
+        color: #fff
+        text-decoration: none
+
+// MENU
+.menu
+  position: absolute
+  top: 56px
+  left: -226px    
+  width: 226px
+  height: 100%
+  overflow-y: auto
+  box-shadow: 1px 1px 25px #898984
+  background: #fff
+  padding-top: 20px
+  z-index: 1
+  ul
+    list-style: none
+    padding-left: 0
+    overflow: hidden
+    float: left
+    display: block
+    width: 100%
+    li
+      width: 100%
+      float: left
+      a
+        display: block
+        padding: 20px 12px
+        font-weight: bold
+        color: $text
+        text-decoration: none
+        &:hover
+          text-decoration: none
+    li.active
+      background: #E5E5E5
+
+// MAIN
+.main
+  padding-bottom: 80px
+
+// Events
+.event
+  background: #fff
+  padding: 15px
+  width: 100%
+  margin-bottom: 30px
+  box-shadow: 1px 1px 10px rgb(195, 195, 191)
+  position: relative
+  ul.event-attendees
+    list-style: none
+    padding-left: 0
+    overflow: hidden
+    margin-bottom: 0
+    li.event-attendee
+      width: 50px
+      float: left
+      display: inline-block
+      img
+        border-radius: 40px
+        width: 40px
+        margin: auto
+  .go-to-event-button
+    position: absolute
+    z-index: 1
+    bottom: 15px
+    right: 15px
+    background: $blue
+    text-align: center
+    border-radius: 25px
+    height: 25px
+    width: 25px
+    padding-top: 3px
+    cursor: pointer
+    .glyphicon
+      font-size: 14px
+      color: #fff
+
+// CALENDAR
+.calendar
+  margin-bottom: 40px
+  margin-top: 30px
+  header
+    text-align: center
+    span
+      font-weight: 100
+      margin-top: 20px
+      margin-bottom: 10px
+      font-size: 36px
+    a
+      font-weight: 100
+      margin-top: 20px
+      margin-bottom: 10px
+      font-size: 56px
+    a:first-child
+      margin-right: 50px
+    a:last-child
+      margin-left: 50px
+
+  table
+    width: 100%
+    height: 541px
+    text-align: center
+    thead
+      th
+        width: 14.285714286%
+        padding: 10px
+        
+    tbody
+      tr:nth-child(2n + 2)
+        background: rgb(250, 250, 250)
+      td
+        width: 14.285714286%
+        height: 100px
+        border: 1px solid rgb(237, 237, 235)
+        position: relative
+        z-index: 0
+        .day
+          position: absolute
+          top: 5px
+          left: 5px
+        .calendar-event
+          font-size: 11px
+          display: block
+          background: rgba(66, 133, 244, 0.2)
+          border-top: rgba(66, 133, 244, 0.2)
+          border-bottom: rgba(66, 133, 244, 0.2)
+          width: 100%
+          padding: 2px 0
+      td.prev-month, td.next-month
+        .day
+          color: rgb(184, 181, 181)
+      td.today
+        .day
+          background: rgb(237, 79, 79)
+          border-radius: 24px
+          height: 24px
+          width: 24px
+          padding-top: 2px
+          padding-left: 1px
+          color: #fff
+
+  perspective: 2000
+  -webkit-perspective: 2000
+  -moz-perspective: 2000 
+  width: 930px
+  height: 621px
+
+
+  .flipper
+    transition: 0.6s
+    transform-style: preserve-3d
+    position: relative
+  .flipper.flip
+    transform: rotateY(180deg)
+  .front, .back
+    background: #fff
+    box-shadow: 1px 1px 10px rgb(195, 195, 191)
+    width: 930px
+    height: 621px
+    backface-visibility: hidden
+    position: absolute
+    top: 0
+    left: 0
+  .front
+    z-index: 2
+    transform: rotateY(0deg)
+  .back
+    transform: rotateY(180deg)
+
+
+  .event-wrapper
+    padding: 15px
+    .event_name
+      text-align: center
+    .back_button
+      position: absolute
+      z-index: 1
+      top: 22px
+      left: 15px
+      background: $blue
+      text-align: center
+      border-radius: 30px
+      height: 39px
+      width: 39px
+      padding-top: 5px
+      cursor: pointer
+      .glyphicon
+        font-size: 24px
+        color: #fff
+    ul.event-attendees
+      list-style: none
+      padding-left: 0
+      overflow: hidden
+      li.event-attendee
+        width: 16.666666667%
+        float: left
+        display: inline-block
+        text-align: center
+        img
+          border-radius: 60px
+          width: 100px
+          margin: auto
+        span.attendee-name
+          float: left
+          display: block
+          width: 100% 
+          margin-top: 10px
+
+.calendar.index
+  background: #fff
+  
+#event-actions
+  position: absolute
+  bottom: 15px
+  right: 15px
+  width: 220px
+  height: 50px
+  .event-action-icon
+    text-align: center
+    border-radius: 30px
+    height: 48px
+    width: 48px
+    padding-top: 10px
+    padding-left: 2px
+    cursor: pointer
+    position: absolute
+    bottom: 0
+    z-index: 0
+    .glyphicon
+      font-size: 24px
+      color: #fff
+  #cog
+    background: $red
+    right: 0
+    z-index: 1
+  .actions
+    #remove
+      background: $blue
+      right: 0px
+      transition: right 0.2s
+      padding-left: 0
+    #add
+      background: $green
+      right: 0px
+      transition: right 0.4s
+    #calendar
+      background: $yellow
+      right: 0px
+      transition: right 0.6s
+  .actions.show
+    #remove
+      background: $blue
+      right: 68px
+      transition: right 0.2s
+      padding-left: 0
+    #add
+      background: $green
+      right: 136px
+      transition: right 0.4s
+    #calendar
+      background: $yellow
+      right: 204px
+      transition: right 0.6s
+      
+        
+
+
+@import "responsive"

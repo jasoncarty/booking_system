@@ -1,0 +1,19 @@
+
+
+.well.log-in
+  h1 Booking system
+  = form_tag login_path, class: 'form-horizontal' do
+
+    .form-group
+      .col-sm-12
+        = text_field_tag :email, '',  class: 'form-control', placeholder: 'Email'
+
+    .form-group
+      .col-sm-12
+        = password_field_tag :password, '', class: 'form-control', placeholder: 'Password'
+
+    .row
+      .col-sm-12
+        = submit_tag 'Log in', class: 'btn btn-blue'
+
+

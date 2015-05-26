@@ -1,0 +1,10 @@
+$('.calendar .back').html('<%= j render "show", index: false %>');
+$('.calendar .flipper').toggleClass('flip')
+$('.event-wrapper .back_button').on('click', function(){
+  $('.calendar .flipper').toggleClass('flip')
+});
+
+// open the event actions
+$('#cog').on('click', function(){
+  $('#event-actions .actions').toggleClass('show');
+});

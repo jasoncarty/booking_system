@@ -1,0 +1,15 @@
+- if flash[:notice]
+  .alert.alert-info
+    a.close[data-dismiss="alert" href="#"]
+      | ×
+    = flash[:notice]
+- if flash[:alert]
+  .alert.alert-danger
+    a.close[data-dismiss="alert" href="#"]
+      | ×
+    = flash[:alert]
+- if flash[:error]
+  .alert.alert-danger
+    a.close[data-dismiss="alert" href="#"]
+      | ×
+    = flash[:error]

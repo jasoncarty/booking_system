@@ -1,0 +1,12 @@
+.calendar
+  .flipper
+    .front
+      = month_calendar events: @events do |date, events|
+        .day
+          = date.strftime("%d")
+
+        - events.each do |event|
+          .calendar-event
+            = link_to event.name, event_path(event), data: {remote: true}
+    .back
+

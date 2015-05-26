@@ -1,0 +1,47 @@
+.event-wrapper
+  .row
+    .col-sm-12
+      - if index
+        a href="#{events_path}"
+          .back_button
+            .glyphicon.glyphicon-chevron-left
+      - else
+        .back_button
+          .glyphicon.glyphicon-chevron-left
+  .row
+    .col-sm-12
+      h1.event_name = @event.name
+  .row
+    .col-sm-12.spacer-25
+      p = @event.description
+  .row
+    .col-sm-6.spacer-25
+      = "Starts at: #{@event.starts_at.strftime '%y-%m-%d %H:%M'}"
+    .col-sm-6.spacer-25
+  .row  
+    .col-sm-12.spacer-25
+      ul.event-attendees
+        - @event.event_attendees.each do |attendee|
+          li.event-attendee data-attendee="#{attendee.id}"
+            = image_tag avatar_url attendee.user, 100
+            span.attendee-name = attendee.user.name
+  
+#event-actions
+  span#cog.event-action-icon
+    i.glyphicon.glyphicon-cog
+  .actions
+    - event_attendee_id = find_event_attendee(current_user.id, @event.id)
+    - if current_user_attending(@event.id)
+      span#remove.event-action-icon
+        = link_to "<i class='glyphicon glyphicon-minus'>".html_safe, event_attendee_path(event_attendee_id), method: :delete, data: {remote: 'true', confirm: 'Are you sure?'}
+          
+    - else
+      span#calendar.event-action-icon
+        i.glyphicon.glyphicon-calendar
+      span#add.event-action-icon
+        = link_to "<i class='glyphicon glyphicon-plus'>".html_safe, event_attendees_path(event_attendee: {user_id: current_user.id, event_id: @event.id}), method: :post, data: {remote: 'true'}
+      
+
+
+
+
