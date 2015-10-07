@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430193832) do
+ActiveRecord::Schema.define(version: 20151005213205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,9 @@ ActiveRecord::Schema.define(version: 20150430193832) do
   create_table "event_attendees", force: :cascade do |t|
     t.integer  "event_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "reserve",    default: false
   end
 
   add_index "event_attendees", ["event_id"], name: "index_event_attendees_on_event_id", using: :btree
@@ -43,11 +44,19 @@ ActiveRecord::Schema.define(version: 20150430193832) do
     t.string   "title"
     t.string   "preview"
     t.integer  "calendar_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "maximum_event_attendees", default: 0
   end
 
   add_index "events", ["calendar_id"], name: "index_events_on_calendar_id", using: :btree
+
+  create_table "site_settings", force: :cascade do |t|
+    t.string   "site_name"
+    t.integer  "maximum_event_attendees", default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

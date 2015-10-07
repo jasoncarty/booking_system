@@ -1,6 +1,7 @@
 @import "application"
 
 $text: rgb(111, 110, 110)
+$red: #d4402b
 // GENERAL STYLING
 *
   box-sizing: border-box
@@ -58,11 +59,11 @@ body
   background: rgb(194, 192, 192)
   min-height: 100%
   color: rgb(111, 110, 110)
-  h1, h2, h3, 
+  h1, h2, h3,
     font-weight: 100
   h4, h5, h6
     font-weight: 200
-  font-weight: 300  
+  font-weight: 300
 
 // NAV
 .navbar
@@ -86,7 +87,7 @@ body
       transition: border-top 0.5s
       margin-bottom: 4px
     &:last-child
-      margin-bottom: 0 
+      margin-bottom: 0
     &:hover .icon-bar
       border-top: 2px solid rgba(255,255,255, 1)
       transition: border-top 0.5s
@@ -114,14 +115,14 @@ body
 // MENU
 .menu
   position: fixed
-  top: 56px
-  left: -226px    
+  top: 0px
+  left: -226px
   width: 226px
   height: 100%
   overflow-y: auto
   box-shadow: 1px 1px 25px #898984
   background: #fff
-  padding-top: 20px
+  padding-top: 76px
   z-index: 1
   ul
     list-style: none
@@ -147,6 +148,22 @@ body
 // MAIN
 .main
   padding-bottom: 80px
+  .delete-link
+    position: absolute
+    z-index: 1
+    top: 15px
+    right: 15px
+    background: $red
+    text-align: center
+    border-radius: 25px
+    height: 25px
+    width: 25px
+    padding-top: 3px
+    cursor: pointer
+    .glyphicon
+      font-size: 14px
+      color: white
+
 
 // ATTENDEES LIST
 ul.event-attendees
@@ -162,7 +179,7 @@ ul.event-attendees
       border-radius: 40px
       width: 40px
       margin: auto
-      
+
 // Events
 .event
   background: #fff
@@ -171,7 +188,7 @@ ul.event-attendees
   margin-bottom: 30px
   box-shadow: 1px 1px 10px rgb(195, 195, 191)
   position: relative
-  
+
   .go-to-event-button
     position: absolute
     z-index: 1
@@ -184,9 +201,50 @@ ul.event-attendees
     width: 25px
     padding-top: 3px
     cursor: pointer
+    a
+      display: block
     .glyphicon
       font-size: 14px
       color: #fff
+
+// ATTENDEES LIST
+ul.event-attendees
+  list-style: none
+  padding-left: 0
+  overflow: hidden
+  margin-bottom: 0
+  margin-top: 10px
+  text-align: center
+  li.event-attendee
+    width: 120px
+    float: left
+    display: inline-block
+    img
+      border-radius: 40px
+      width: 40px
+      margin: auto
+    span.attendee-name
+      width: 100%
+      display: block
+      margin-top: 10px
+
+.user-list
+  overflow: hidden
+  height: auto
+  padding: 15px 0
+  li
+    float: left
+    width: 100%
+    display: block
+    .user-wrapper
+      padding: 6px 12px
+      &:after
+        display: block
+        content: ''
+        clear: both
+  li.selected
+    display: none
+
 
 // USERS
 .main
@@ -223,6 +281,22 @@ ul.event-attendees
       .glyphicon
         font-size: 14px
         color: #fff
-  
+
+// PAGINATION
+.pagination
+  span, a
+    background: #fff
+    border: 1px solid #000
+    color: #000
+    &:hover
+      text-decoration: none
+  a, span, em
+    padding: 6px 12px
+    border-radius: 20px
+    line-height: 14px
+    border: 1px solid #000
+  em
+    background: #000
+    color: #fff
 
 @import "responsive"

@@ -1,0 +1,6 @@
+<% if @result == 'success' %>
+  $('[data-event-id="<%= @event.id %>"]').fadeOut(300);
+<% else %>
+  var html = "<div class='alert alert-danger'><%= @result.to_s %></div>"
+  $('[data-event-id="<%= @event.id %>"]').append(html);
+<% end %>

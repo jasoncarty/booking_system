@@ -12,6 +12,8 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
         ul
           li class="#{active_link?(admin_events_path)} #{active_link?(admin_root_path)}"
             = link_to 'Events', admin_events_path
+          li class="#{active_link?(old_events_admin_events_path)}"
+            = link_to 'Old Events', old_events_admin_events_path
           li class="#{active_link?(new_admin_event_path)}"
             = link_to 'New Event', new_admin_event_path
           li class="#{active_link?(admin_users_path)}"
@@ -36,7 +38,7 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
           .user
             = image_tag avatar_url(@current_user)
 
-      .main  
+      .main
         .container
           = render 'shared/flash'
           = yield

@@ -13,6 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'slim'
 gem 'quiet_assets'
 gem "simple_calendar", "~> 1.1.0"
+gem 'will_paginate', '~> 3.0.6'
 
 # Assets
 gem 'bootstrap-sass', '~> 3.3.4'
@@ -22,6 +23,7 @@ gem "select2-rails"
 
 group :development do
   gem "letter_opener"
+  gem 'annotate'
 end
 
 group :development, :test do

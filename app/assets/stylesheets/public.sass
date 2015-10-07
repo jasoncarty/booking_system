@@ -16,6 +16,17 @@ $yellow: #FFB800
   box-shadow: 1px 1px 5px #898984
   width: 100%
 
+.btn-red
+  background: $red
+  color: white
+  border-radius: 0
+  box-shadow: 1px 1px 5px #898984
+  width: 100%
+
+.btn-center
+  margin: 0 auto
+  width: auto
+
 .form-control
   border-radius: 0
 
@@ -35,7 +46,7 @@ body.not-logged-in
     box-shadow: 1px 1px 25px rgb(20, 35, 58)
     border-radius: 0
 
-  // LOG IN FORM  
+  // LOG IN FORM
   .well.log-in
     margin-top: 50%
     h1, h4
@@ -57,11 +68,11 @@ body
   background: #ECECEC
   min-height: 100%
   color: rgb(111, 110, 110)
-  h1, h2, h3, 
+  h1, h2, h3,
     font-weight: 100
   h4, h5, h6
     font-weight: 200
-  font-weight: 300  
+  font-weight: 300
 
 // NAV
 .navbar
@@ -85,7 +96,7 @@ body
       transition: border-top 0.5s
       margin-bottom: 4px
     &:last-child
-      margin-bottom: 0 
+      margin-bottom: 0
     &:hover .icon-bar
       border-top: 2px solid rgba(255,255,255, 1)
       transition: border-top 0.5s
@@ -113,14 +124,14 @@ body
 // MENU
 .menu
   position: absolute
-  top: 56px
-  left: -226px    
+  top: 0px
+  left: -226px
   width: 226px
   height: 100%
   overflow-y: auto
   box-shadow: 1px 1px 25px #898984
   background: #fff
-  padding-top: 20px
+  padding-top: 76px
   z-index: 1
   ul
     list-style: none
@@ -155,19 +166,7 @@ body
   margin-bottom: 30px
   box-shadow: 1px 1px 10px rgb(195, 195, 191)
   position: relative
-  ul.event-attendees
-    list-style: none
-    padding-left: 0
-    overflow: hidden
-    margin-bottom: 0
-    li.event-attendee
-      width: 50px
-      float: left
-      display: inline-block
-      img
-        border-radius: 40px
-        width: 40px
-        margin: auto
+
   .go-to-event-button
     position: absolute
     z-index: 1
@@ -183,6 +182,27 @@ body
     .glyphicon
       font-size: 14px
       color: #fff
+
+// ATTENDEES LIST
+ul.event-attendees
+  list-style: none
+  padding-left: 0
+  overflow: hidden
+  margin-bottom: 0
+  margin-top: 10px
+  text-align: center
+  li.event-attendee
+    width: 120px
+    float: left
+    display: inline-block
+    img
+      border-radius: 40px
+      width: 40px
+      margin: auto
+    span.attendee-name
+      width: 100%
+      display: block
+      margin-top: 10px
 
 // CALENDAR
 .calendar
@@ -213,7 +233,7 @@ body
       th
         width: 14.285714286%
         padding: 10px
-        
+
     tbody
       tr:nth-child(2n + 2)
         background: rgb(250, 250, 250)
@@ -250,7 +270,7 @@ body
 
   perspective: 2000
   -webkit-perspective: 2000
-  -moz-perspective: 2000 
+  -moz-perspective: 2000
   width: 930px
   height: 621px
 
@@ -312,12 +332,12 @@ body
         span.attendee-name
           float: left
           display: block
-          width: 100% 
+          width: 100%
           margin-top: 10px
 
 .calendar.index
   background: #fff
-  
+
 #event-actions
   position: absolute
   bottom: 15px
@@ -370,8 +390,29 @@ body
       background: $yellow
       right: 204px
       transition: right 0.6s
-      
-        
+
+// PAGINATION
+.pagination
+  span, a
+    background: #fff
+    border: 1px solid $blue
+    color: $blue
+    &:hover
+      text-decoration: none
+  a, span, em
+    padding: 6px 12px
+    border-radius: 20px
+    line-height: 14px
+    border: 1px solid $blue
+  em
+    background: $blue
+    color: #fff
+
+
+
+
+
+
 
 
 @import "responsive"

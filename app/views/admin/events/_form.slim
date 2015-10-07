@@ -4,41 +4,64 @@
     = f.text_field :name, class: 'form-control'
 
   .form-group
-    = f.label :url
-    .input-group
-      .input-group-addon 
-        | /e/
-      = f.text_field :url, class: 'form-control'
-
-  .form-group
     = f.label :description
-    = f.text_area :description, class: 'form-control' 
+    = f.text_area :description, class: 'form-control'
 
   .form-group
     .row
-      .col-sm-6
+      .col-sm-12
         = f.label :starts_at
         = f.text_field :starts_at, class: 'form-control datetimepicker', value: event.starts_at.nil? ? '' :event.starts_at.strftime('%Y-%m-%d %H:%M')
-      .col-sm-6 
-        = f.label :ends_at
-        = f.text_field :ends_at, class: 'form-control datetimepicker', value: event.ends_at.nil? ? '' :event.ends_at.strftime('%Y-%m-%d %H:%M')
+
+  - if @settings
+    div(data-event-max=@settings.maximum_attendees )
+  - elsif @event.maximum_event_attendees
+    div(data-event-max=@event.maximum_event_attendees )
+  - else
+    div(data-event-max="8" )
 
   .form-group
-    = f.label :calendar
-    = f.collection_select(:calendar_id, Calendar.all, :id, :name, {prompt: "Select a calendar"}, {class: "form-control select2"})
+    = f.label :maximum_event_attendees
+    = f.number_field :maximum_event_attendees, class: 'form-control'
 
   .form-group
-    label Attendees
-    ul.event-attendees
-      - event.event_attendees.each do |attendee|
-        li.event-attendee data-attendee="#{attendee.id}"
-          = image_tag avatar_url(attendee.user, 40), alt: attendee.user.name
+    .hidden
+      .hidden-attendees
+        select(multiple="true" name="attendees[attendees][]" id="event_attendees")
+      .hidden-reserves
+        select(multiple="true" name="attendees[reserves][]" id="event_reserves")
+
+
+  .row
+    .col-sm-4
+      label Invite people to attend
+      ul.user-list.form-control.users
+        - @users.each do |user|
+          li(data-id=user.id data-name=user.name )
+            .user-wrapper
+              =user.name
+              .btn.btn-success.btn-inline.btn-sm.pull-right Add
+
+    .col-sm-4
+      label Attendees
+      ul.user-list.form-control.attendees
+        - if @attendees and @attendees.length > 0
+          - @attendees.each do |attendee|
+            li.event-attendee(data-id=attendee.user.id data-name=attendee.user.name)
+              .user-wrapper
+                =attendee.user.name
+                .btn.btn-danger.btn-inline.btn-sm.pull-right Remove
+
+    .col-sm-4
+      label Reserves
+      ul.user-list.form-control.reserves
+        - if @reserves and @reserves.length > 0
+          - @reserves.each do |reserve|
+            li.event-attendee(data-id=reserve.user.id data-name=reserve.user.name)
+              .user-wrapper
+                = reserve.user.name
+                .btn.btn-danger.btn-inline.btn-sm.pull-right Remove
 
   .form-group
-    label Invite people to attend
-    /= select_tag("user_ids", options_from_collection_for_select(User.all, "id", "name", {selected: attendees_ids(event)}), {class: 'form-control select2', multiple: true})
-    = collection_select(:event, User.all, :id, :name, {selected: attendees_ids(event)}, {class: 'form-control select2', multiple: true})
-
-  .form-group  
-    = f.submit 'Save changes', class: 'btn btn-blue'
+    = f.submit 'Save changes', class: 'btn btn-blue', id: 'save-event'
 

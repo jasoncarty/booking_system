@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                           :integer          not null, primary key
+#  name                         :string
+#  email                        :string
+#  password_digest              :string
+#  confirmed                    :boolean
+#  confirmed_at                 :datetime
+#  verification_token           :string
+#  verification_sent_at         :datetime
+#  password_reset_token         :string
+#  password_reset_token_sent_at :datetime
+#  role                         :string           default("user")
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#
+
 class User < ActiveRecord::Base
 
   attr_accessor :validate_password
@@ -17,6 +36,9 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: {minimum: 6}, if: :validate_password?
   validates :password, confirmation: true, on: :update, if: :validate_password?
 
+  # Model scopes
+  scope :not_attending, -> (attendees) { where("users.id NOT IN (#{attendees})") }
+
   # Callbacks
   before_create :add_verify_token
 
@@ -33,7 +55,6 @@ class User < ActiveRecord::Base
 
   def generate_token
     token = Digest::SHA1.hexdigest([Time.now, rand].join)
-  end  
-  
+  end
 
 end

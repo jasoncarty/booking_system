@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   scope module: 'public' do
     resources :users, only: [:index, :show, :edit, :update]
     resources :events, only: [:index, :show, :edit, :update] do
@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     get "/users/verify/:token",   to: "users#verify",       as: "user_verify"
     post "/users/verification/",  to: "users#verification", as: "user_verification"
   end
-  
+
   namespace :admin do
     root 'events#index'
     resources :users
-    resources :events
+    resources :events do
+      get "old_events", to: "events#old_events", as: "old_events", on: :member, on: :collection
+    end
+
     resources :calendars
     resources :event_attendees
   end
