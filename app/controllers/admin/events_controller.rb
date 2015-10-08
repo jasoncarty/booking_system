@@ -3,7 +3,7 @@ class Admin::EventsController < AdminController
   layout false, only: [:destroy]
 
   def index
-    @events = Event.includes(event_attendees: :user)
+    @events = Event.preload(attendees: :user, reserves: :user)
               .all
               .where('starts_at > ?', Time.now)
               .order(starts_at: :asc)
@@ -11,7 +11,7 @@ class Admin::EventsController < AdminController
   end
 
   def old_events
-    @events = Event.includes(event_attendees: :user)
+    @events = Event.preload(attendees: :user, reserves: :user)
               .all
               .where('starts_at < ?', Time.now)
               .order(starts_at: :asc)
@@ -42,16 +42,12 @@ class Admin::EventsController < AdminController
   end
 
   def edit
-    @event      = Event.find(params[:id])
-    @attendees  = EventAttendee.includes(:user).where(event_id: params[:id], reserve: false)
-    @reserves   = EventAttendee.includes(:user).where(event_id: params[:id], reserve: true)
-    @users      = User.not_attending(attendees_ids(params[:id]))
-
+    @event = Event.preload(attendees: :user, reserves: :user).find(params[:id])
+    @users = User.not_attending(attendees_ids(params[:id]))
   end
 
   def update
     @event = Event.find(params[:id])
-
     if @event.update(event_params)
       @users = User.all
       if params['attendees'].present?
@@ -77,7 +73,6 @@ class Admin::EventsController < AdminController
       :maximum_event_attendees,
       :attendees => [],
       :reserves => []
-
     )
   end
 

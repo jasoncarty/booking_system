@@ -24,6 +24,7 @@ gem "select2-rails"
 group :development do
   gem "letter_opener"
   gem 'annotate'
+  gem 'pry-rails'
 end
 
 group :development, :test do

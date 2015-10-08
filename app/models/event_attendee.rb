@@ -18,4 +18,8 @@ class EventAttendee < ActiveRecord::Base
   # Model validations
   validates :user_id, presence: true, uniqueness: { scope: :event_id }
 
+  # Scopes
+  scope :reserves, -> { where reserve: true }
+  scope :attendees, -> { where reserve: false }
+
 end

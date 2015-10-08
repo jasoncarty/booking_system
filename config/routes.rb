@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   scope module: 'public' do
     resources :users, only: [:index, :show, :edit, :update]
     resources :events, only: [:index, :show, :edit, :update] do
-      get "show_events/:id", to: "events#show_event", as: "show_event", on: :member, on: :collection
+      post '/:id/book', to: 'events#book', as: 'book', on: :member, on: :collection
+      post '/:id/cancel', to: 'events#cancel', as: 'cancel', on: :member, on: :collection
     end
     resources :calendars, only: [:index, :show]
     resources :event_attendees

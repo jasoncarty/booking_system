@@ -45,8 +45,8 @@
     .col-sm-4
       label Attendees
       ul.user-list.form-control.attendees
-        - if @attendees and @attendees.length > 0
-          - @attendees.each do |attendee|
+        - if @event.attendees and @event.attendees.length > 0
+          - @event.attendees.each do |attendee|
             li.event-attendee(data-id=attendee.user.id data-name=attendee.user.name)
               .user-wrapper
                 =attendee.user.name
@@ -55,8 +55,8 @@
     .col-sm-4
       label Reserves
       ul.user-list.form-control.reserves
-        - if @reserves and @reserves.length > 0
-          - @reserves.each do |reserve|
+        - if @event.reserves and @event.reserves.length > 0
+          - @event.reserves.each do |reserve|
             li.event-attendee(data-id=reserve.user.id data-name=reserve.user.name)
               .user-wrapper
                 = reserve.user.name

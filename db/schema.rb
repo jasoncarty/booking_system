@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005213205) do
+ActiveRecord::Schema.define(version: 20151008173152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20151005213205) do
   end
 
   add_index "events", ["calendar_id"], name: "index_events_on_calendar_id", using: :btree
+  add_index "events", ["starts_at"], name: "index_events_on_starts_at", using: :btree
 
   create_table "site_settings", force: :cascade do |t|
     t.string   "site_name"
