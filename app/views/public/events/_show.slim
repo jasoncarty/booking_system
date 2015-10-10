@@ -1,4 +1,4 @@
-.event-wrapper
+.event-wrapper(data-event-id=@event.id)
   .row
     .col-sm-12
       - if index
@@ -18,30 +18,33 @@
     .col-sm-6.spacer-25
       = "Starts at: #{@event.starts_at.strftime '%y-%m-%d %H:%M'}"
     .col-sm-6.spacer-25
-  .row  
+  .row
     .col-sm-12.spacer-25
-      ul.event-attendees
-        - @event.event_attendees.each do |attendee|
-          li.event-attendee data-attendee="#{attendee.id}"
-            = image_tag avatar_url attendee.user, 100
-            span.attendee-name = attendee.user.name
-  
-#event-actions
-  span#cog.event-action-icon
-    i.glyphicon.glyphicon-cog
-  .actions
-    - event_attendee_id = find_event_attendee(current_user.id, @event.id)
-    - if current_user_attending(@event.id)
-      span#remove.event-action-icon
-        = link_to "<i class='glyphicon glyphicon-minus'>".html_safe, event_attendee_path(event_attendee_id), method: :delete, data: {remote: 'true', confirm: 'Are you sure?'}
-          
-    - else
-      span#calendar.event-action-icon
-        i.glyphicon.glyphicon-calendar
-      span#add.event-action-icon
-        = link_to "<i class='glyphicon glyphicon-plus'>".html_safe, event_attendees_path(event_attendee: {user_id: current_user.id, event_id: @event.id}), method: :post, data: {remote: 'true'}
-      
+      .event-attendees.not-reserves
+        - if @event.attendees.size > 0
+          .attendees-wrapper
+            h5 Attendees
+            ul.event-attendees.not-reserves
+              - @event.attendees.each do |attendee|
+                - if !attendee.reserve
+                  li.event-attendee
+                    = image_tag avatar_url(attendee.user, 40), alt: attendee.user.name
+                    span.attendee-name=attendee.user.name
+
+      .event-attendees.reserves
+        - if @event.reserves.size > 0
+          h5.spacer-15 Reserves
+          ul.event-attendees.reserves
+            - @event.reserves.each do |attendee|
+              li.event-attendee data-attendee="#{attendee.id}"
+                = image_tag avatar_url(attendee.user, 40), alt: attendee.user.name
+                span.attendee-name=attendee.user.name
 
 
-
+  .row.spacer-25.actions
+    .col-sm-12
+      - if @event.current_user_attending(current_user)
+        = link_to "No longer interested", cancel_events_path(@event), class: "btn btn-red btn-center", data: {remote: true, booking: 'cancel', event_id: @event.id }, method: 'post'
+      - else
+        = link_to "Join in", book_events_path(@event), class: "btn btn-blue btn-center", data: {remote: true, booking: 'book', event_id: @event.id}, method: 'post'
 

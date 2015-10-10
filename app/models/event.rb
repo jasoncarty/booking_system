@@ -77,7 +77,8 @@ class Event < ActiveRecord::Base
 
   def save_users
     if self.save
-      self.reload.to_json(:include => [reserves: { :include => :user }, attendees: { :include => :user } ])
+      self.reload.to_json({:include => { :reserves => { :include => :user }, :attendees => { :include => :user } }})
+
     else
       self.errors.messages.to_json
     end
@@ -87,7 +88,7 @@ class Event < ActiveRecord::Base
     self.reserves.last.update_attribute(:reserve, false)
   end
 
-  def current_user_playing current_user
+  def current_user_attending current_user
     EventAttendee.where(event_id: self.id, user_id: current_user.id).first
   end
 

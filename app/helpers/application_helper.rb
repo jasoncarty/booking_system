@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def admin?
-    @current_user.role == 'admin' ? true : false
+    @current_user.role == 'admin'
   end
 
   def active_link?(link)
@@ -17,6 +17,6 @@ module ApplicationHelper
 
   def generate_token
     token = Digest::SHA1.hexdigest([Time.now, rand].join)
-  end  
+  end
 
 end

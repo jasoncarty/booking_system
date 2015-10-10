@@ -11,11 +11,11 @@ class Public::EventsController < PublicController
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = Event.preload(reserves: :user, attendees: :user).find(params[:id])
   end
 
   def show_event
-    @event = Event.find(params[:id])
+    @event = Event.preload(reserves: :user, attendees: :user).find(params[:id])
   end
 
   def book

@@ -1,1 +1,4 @@
-console.log(<%= @result.html_safe %>);
+
+var data = <%= @result.html_safe %>;
+changeCancelButtons(data.id);
+reloadUsers(data);
