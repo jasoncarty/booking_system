@@ -68,13 +68,14 @@ body
 // NAV
 .navbar
   display: flex
+  position: fixed
   align-items: center
   background: rgb(36, 35, 35)
   height: 56px
   width: 100%
   left: 0
   top: 0
-  z-index: 1
+  z-index: 2
   box-shadow: 1px 1px 25px rgb(34, 34, 32)
   border-radius: 0
   padding: 0 30px
@@ -94,6 +95,7 @@ body
   .nav-right
     position: absolute
     right: 30px
+    top: 0
     .user
       position: relative
       top: 8px
@@ -147,6 +149,7 @@ body
 
 // MAIN
 .main
+  padding-top: 56px
   padding-bottom: 80px
   .delete-link
     position: absolute

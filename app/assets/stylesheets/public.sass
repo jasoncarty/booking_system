@@ -30,6 +30,9 @@ $yellow: #FFB800
 .form-control
   border-radius: 0
 
+.spacer-10
+  margin-top: 10px
+
 .spacer-25
   margin-top: 25px
 
@@ -76,8 +79,14 @@ body
 
 // NAV
 .navbar
+  position: fixed
+  z-index: 2
   display: flex
+  display: -webkit-box
+  display: -ms-flexbox
+  display: -webkit-flex
   align-items: center
+  -webkit-align-items: center
   background: $blue
   height: 56px
   width: 100%
@@ -103,6 +112,7 @@ body
   .nav-right
     position: absolute
     right: 30px
+    top: 0
     .user
       position: relative
       top: 8px
@@ -156,6 +166,7 @@ body
 
 // MAIN
 .main
+  padding-top: 56px
   padding-bottom: 80px
 
 // Events
@@ -243,10 +254,15 @@ ul.event-attendees
         border: 1px solid rgb(237, 237, 235)
         position: relative
         z-index: 0
+        overflow: auto
+        text-align: left
+        vertical-align: top
         .day
-          position: absolute
-          top: 5px
-          left: 5px
+          position: relative
+          padding: 5px
+          top: 0
+          width: 100%
+          float: left
         .calendar-event
           font-size: 11px
           display: block
@@ -255,6 +271,9 @@ ul.event-attendees
           border-bottom: rgba(66, 133, 244, 0.2)
           width: 100%
           padding: 2px 0
+          float: left
+        .calendar-event + .calendar-event
+          margin-top: 5px
       td.prev-month, td.next-month
         .day
           color: rgb(184, 181, 181)
@@ -271,7 +290,7 @@ ul.event-attendees
   perspective: 2000
   -webkit-perspective: 2000
   -moz-perspective: 2000
-  width: 930px
+  width: 100%
   height: 621px
 
 
@@ -284,8 +303,9 @@ ul.event-attendees
   .front, .back
     background: #fff
     box-shadow: 1px 1px 10px rgb(195, 195, 191)
-    width: 930px
-    height: 621px
+    width: 100%
+    min-height: 621px
+    transform: height 0.6s
     backface-visibility: hidden
     position: absolute
     top: 0
@@ -299,6 +319,7 @@ ul.event-attendees
 
   .event-wrapper
     padding: 15px
+    padding-bottom: 49px
     .event_name
       text-align: center
     .back_button
@@ -322,6 +343,7 @@ ul.event-attendees
       overflow: hidden
       li.event-attendee
         width: 16.666666667%
+        margin-bottom: 15px
         float: left
         display: inline-block
         text-align: center
@@ -335,8 +357,14 @@ ul.event-attendees
           width: 100%
           margin-top: 10px
 
+    .actions
+      position: absolute
+      bottom: 15px
+      left: 15px
+
 .calendar.index
   background: #fff
+
 
 #event-actions
   position: absolute

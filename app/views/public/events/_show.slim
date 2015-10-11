@@ -12,12 +12,12 @@
     .col-sm-12
       h1.event_name = @event.name
   .row
-    .col-sm-12.spacer-25
+    .col-sm-12.spacer-10
       p = @event.description
   .row
-    .col-sm-6.spacer-25
-      = "Starts at: #{@event.starts_at.strftime '%y-%m-%d %H:%M'}"
-    .col-sm-6.spacer-25
+    .col-sm-6.spacer-10
+      b Starts at:
+      = " #{@event.starts_at.strftime '%y-%m-%d %H:%M'}"
   .row
     .col-sm-12.spacer-25
       .event-attendees.not-reserves
@@ -28,7 +28,7 @@
               - @event.attendees.each do |attendee|
                 - if !attendee.reserve
                   li.event-attendee
-                    = image_tag avatar_url(attendee.user, 40), alt: attendee.user.name
+                    = image_tag avatar_url(attendee.user, 100), alt: attendee.user.name
                     span.attendee-name=attendee.user.name
 
       .event-attendees.reserves
@@ -37,7 +37,7 @@
           ul.event-attendees.reserves
             - @event.reserves.each do |attendee|
               li.event-attendee data-attendee="#{attendee.id}"
-                = image_tag avatar_url(attendee.user, 40), alt: attendee.user.name
+                = image_tag avatar_url(attendee.user, 100), alt: attendee.user.name
                 span.attendee-name=attendee.user.name
 
 

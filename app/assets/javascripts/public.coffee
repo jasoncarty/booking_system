@@ -15,8 +15,10 @@ ready = ->
           $('.menu').addClass('open')
 
   # open the event actions
-  $('#cog').on 'click', ->
-    $('#event-actions .actions').toggleClass('show')
+  $('.calendar-event a').on 'click', ->
+    $('html, body').animate({
+        scrollTop: $(".flipper").offset().top - 100
+    }, 600)
 
 window.changeBookingButtons = (event_id) ->
   $("[data-event-id='#{event_id}'] [data-booking]").remove()

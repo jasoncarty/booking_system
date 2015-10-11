@@ -1,5 +1,121 @@
 
 @media (min-width: 1200px)
-  
+
   .container
     width: 960px
+
+@media (max-width: 767px)
+
+  .calendar
+    height: auto
+    .flipper
+      .back
+        min-height: 0
+        height: 0
+        position: relative
+        .event-wrapper
+          ul.event-attendees
+            li.event-attendee
+              width: 20%
+              img
+                width: 40px
+
+      .front
+        position: relative
+        table
+          height: auto
+          table-layout: fixed
+          thead
+            display: none
+          tbody
+            display: block
+            width: 100%
+            float: left
+            height: auto
+            tr
+              display: block
+              width: 100%
+              float: left
+              height: auto
+              td
+                display: block
+                width: 100%
+                float: left
+                height: auto
+                padding: 10px
+                .day
+                  position: relative
+                  float: left
+                  width: 10%
+                  height: 100%
+                  top: inherit
+                  text-align: center
+                  left: inherit
+                .calendar-event
+                  float: right
+                  width: 90%
+                  padding: 2px
+                  text-align: center
+                  a
+                    display: block
+
+    .event-wrapper
+      .event_name
+        margin-top: 70px
+
+    .flipper.flip
+      .front
+        height: 0
+        min-height: 0
+      .back
+        height: auto
+        min-height: 621px
+
+@media (max-width: 450px)
+
+  // NAV
+  .navbar
+    .branding
+      h2
+        font-size: 26px
+
+
+@media (max-width: 434px)
+
+  // MEMBERS
+  .main
+    .user
+      .user-details
+        margin-top: 15px
+
+@media (max-width: 400px)
+
+  // NAV
+  .navbar
+    .branding
+      h2
+        font-size: 20px
+
+@media (max-width: 377px)
+
+  // CALENDAR
+  .calendar
+    header
+      span
+        font-size: 28px
+
+@media (max-width: 357px)
+
+  // CALENDAR
+  .calendar
+    header
+      span
+        font-size: 20px
+
+@media (max-width: 320px)
+
+  // NAV
+  .navbar
+    .branding
+      h2
+        font-size: 18px
