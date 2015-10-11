@@ -23,8 +23,9 @@ Rails.application.routes.draw do
       get "old_events", to: "events#old_events", as: "old_events", on: :member, on: :collection
     end
 
-    resources :calendars
     resources :event_attendees
+    get "site_settings", to: "site_settings#edit", as: "site_settings"
+    put "update_site_settings", to: "site_settings#update", as: "update_site_settings"
   end
 
   root 'public/events#index'

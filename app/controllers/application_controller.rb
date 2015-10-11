@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-  helper_method :current_user
+  helper_method :current_user, :default_maximum_event_attendees, :settings, :sitename
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
   end
 
   def settings
-    @settings ||= SiteSetting.all.first
+    @settings ||= SiteSetting.first
+  end
+
+  def default_maximum_event_attendees
+    settings.maximum_event_attendees
+  end
+
+  def sitename
+    settings.site_name
   end
 end

@@ -1,0 +1,14 @@
+h1 Edit Site Settings
+= render 'shared/errors', model: @site_setting
+= form_for @site_setting, url: admin_update_site_settings_path, method: :put do |f|
+
+  .form-group
+    = f.label :site_name
+    = f.text_field :site_name, class: 'form-control'
+
+  .form-group
+    = f.label :maximum_event_attendees
+    = f.number_field :maximum_event_attendees, class: 'form-control'
+
+  .form-group
+    = f.submit 'Save changes', class: 'btn btn-blue'
