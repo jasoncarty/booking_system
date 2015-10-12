@@ -1,10 +1,6 @@
 doctype html
 head
-  title
-    - if settings and sitename
-      = sitename
-    - else
-      | BookingSystem
+  title sitename
   = stylesheet_link_tag    'public', media: 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'public', 'data-turbolinks-track' => true
   script(src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/1.1.1/js/md5.min.js")
@@ -32,7 +28,7 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
         .container
           .branding
             h2
-             = link_to "#{settings and sitename ? sitename : 'Booking System'}", root_path
+             = link_to sitename, root_path
         .nav-right
           .user
             = image_tag avatar_url(current_user)

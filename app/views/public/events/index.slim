@@ -10,9 +10,7 @@
       p = event.description
       p
         b = "Start: #{event.starts_at.strftime '%y-%m-%d %H:%M'}"
-      - attendees = []; reserves = []
-      - event.event_attendees.each do |a|
-        - a.reserve ? reserves.push(a) : attendees.push(a)
+      - reserves, attendees = event.event_attendees.to_a.partition(&:reserve)
       .event-attendees.not-reserves
         - if attendees.size > 0
           .attendees-wrapper

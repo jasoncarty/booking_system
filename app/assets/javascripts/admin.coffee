@@ -27,6 +27,8 @@ ready = ->
   # Adding users to Events
   #------------------------
 
+
+
   $('ul.attendees li').each ->
     attendees.push($(this).data('id'))
 
@@ -58,6 +60,9 @@ ready = ->
       sortOutAttendeesAndReserves()
 
   max_attendees = $('#event_maximum_event_attendees').val()
+
+  if $('#event_maximum_event_attendees').length > 0
+    sortOutAttendeesAndReserves()
 
 addUser = ($el) ->
   li   = $el.parent('.user-wrapper').parent('li')
@@ -104,7 +109,7 @@ removeAttendee = ($el) ->
   html += "</li>"
   li.remove()
   if reserves.length > 0
-    reserve_li = $('ul.reserves li:last')
+    reserve_li = $('ul.reserves li:first')
     reserve_id = reserve_li.data('id')
     reserve_li.remove()
     attendees.push(reserve_id)
@@ -164,9 +169,9 @@ addUsersAndReserves = ->
 sortOutAttendeesAndReserves = ->
   amount_to_remove = attendees.length - max_attendees
   if attendees.length > max_attendees and reserves.length > 0
-
     $($("ul.attendees li").get().reverse()).each (index, value) ->
-      removeAttendee $(this).find('.user-wrapper').find('.btn')
+      addUser $(this).find('.user-wrapper').find('.btn')
+      attendees.splice(attendees.indexOf($(this).data('id')), 1)
       return false if index == ( amount_to_remove - 1 )
 
   else if attendees.length > max_attendees and reserves.length == 0
@@ -179,6 +184,7 @@ sortOutAttendeesAndReserves = ->
     $("ul.reserves li").each (index, value) ->
       removeReserve $(this).find('.user-wrapper').find('.btn')
       return false if index == ( amount_to_add - 1 )
+  addUsersAndReserves()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

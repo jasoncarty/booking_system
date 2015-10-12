@@ -1,10 +1,6 @@
 doctype html
 head
-  title
-    - if settings and sitename
-      = sitename
-    - else
-      | BookingSystem
+  title sitename
   = stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'admin', 'data-turbolinks-track' => true
   = csrf_meta_tags
@@ -38,8 +34,7 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
         .container
           .branding
             h2
-              = sitename
-              = link_to "#{settings and sitename ? sitename : 'Booking System'}", root_path
+              = link_to sitename, root_path
         .nav-right
           .user
             = image_tag avatar_url(@current_user)

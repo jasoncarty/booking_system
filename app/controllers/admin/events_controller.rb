@@ -3,16 +3,14 @@ class Admin::EventsController < AdminController
   layout false, only: [:destroy]
 
   def index
-    @events = Event.preload(attendees: :user, reserves: :user)
-              .all
+    @events = Event.preload(event_attendees: :user)
               .where('starts_at > ?', Time.now)
               .order(starts_at: :asc)
               .paginate(page: params[:page], per_page: 10)
   end
 
   def old_events
-    @events = Event.preload(attendees: :user, reserves: :user)
-              .all
+    @events = Event.preload(event_attendees: :user)
               .where('starts_at < ?', Time.now)
               .order(starts_at: :asc)
               .paginate(page: params[:page], per_page: 10)
@@ -48,13 +46,13 @@ class Admin::EventsController < AdminController
 
   def update
     @event = Event.find(params[:id])
+    @users = User.all
     if @event.update(event_params)
-      @users = User.all
-      if params['attendees'].present?
-        @event.save_attendees params['attendees']
-      else
-        @event.remove_attendees
-      end
+      # if params['attendees'].present?
+      #   @event.update_attendees params['attendees']
+      # else
+      #   @event.remove_attendees
+      # end
       flash[:notice] = 'Changes saved'
       redirect_to admin_events_path
     else
@@ -71,8 +69,8 @@ class Admin::EventsController < AdminController
       :ends_at,
       :calendar_id,
       :maximum_event_attendees,
-      :attendees => [],
-      :reserves => []
+      :attendee_user_ids => [],
+      :reserve_user_ids => []
     )
   end
 

@@ -27,12 +27,16 @@ class Event < ActiveRecord::Base
   has_many :reserves, -> { reserves }, class_name: 'EventAttendee'
   has_many :attendees, -> { attendees }, class_name: 'EventAttendee'
 
+  has_many :reserve_users, through: :reserves, class_name: 'User'
+  has_many :attendee_users, through: :attendees, class_name: 'User'
+
+  accepts_nested_attributes_for :reserve_users
+  accepts_nested_attributes_for :attendee_users
 
   has_many :users, through: :event_attendees
 
   validates :name, presence: true
   validates :starts_at, presence: true
-
 
   def remove_attendees
     self.event_attendees.each { |e| e.destroy }
@@ -75,21 +79,47 @@ class Event < ActiveRecord::Base
     self.save_users
   end
 
+  def update_attendees attendees
+    existing_user_ids = self.event_attendees.pluck(:id)
+    users = []
+    if attendees[:attendees].present?
+      users << sort_through_users_to_be_updated(false, 'attendees', attendees, existing_user_ids)
+    end
+    if attendees[:reserves].present?
+      users << sort_through_users_to_be_updated(true, 'reserves', attendees, existing_user_ids)
+    end
+    self.event_attendees.create(users)
+    self.save
+  end
+
+  def sort_through_users_to_be_updated reserve, array_name, attendees, existing_user_ids
+    users = []
+    users_to_be_deleted = []
+    attendees[array_name].each do |attendee|
+      if attendee.in?(existing_user_ids)
+        users_to_be_deleted.push attendee
+      else
+        users << add_attendees_to_array(attendees[array_name], reserve)
+      end
+    end
+    users_to_be_deleted.each(&:destroy_attendees)
+    users
+  end
+
+  def destroy_attendees id
+    EventAttendee.find(id).destroy
+  end
+
   def save_users
     if self.save
       self.reload.to_json({:include => { :reserves => { :include => :user }, :attendees => { :include => :user } }})
-
     else
       self.errors.messages.to_json
     end
   end
 
   def rearrange_users
-    self.reserves.last.update_attribute(:reserve, false)
-  end
-
-  def current_user_attending current_user
-    EventAttendee.where(event_id: self.id, user_id: current_user.id).first
+    self.reserves.order(id: :asc).first.update_attribute(:reserve, false)
   end
 
   def add_attendees_to_array attendees, reserve

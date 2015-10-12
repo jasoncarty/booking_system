@@ -35,7 +35,7 @@ window.reloadUsers = (data) ->
   eventId = data.id
   i = 0
   html = ''
-  if $("[data-event-id='#{eventId}'] ul.event-attendees.not-reserves").length == 0
+  if $("[data-event-id='#{eventId}'] ul.event-attendees.not-reserves").length == 0 and data.attendees.length > 0
     html += '<h5>Attendees</h5>'
     html += "<ul class='event-attendees not-reserves'>"
   while data.attendees.length > i
@@ -44,7 +44,7 @@ window.reloadUsers = (data) ->
     html += "<li class='event-attendee' data-attendee='#{user.id}'><img src='#{hash}' alt='#{user.name}'><span class='attendee-name'>#{user.name}</span></li>"
     i++
 
-  if $("[data-event-id='#{eventId}'] ul.event-attendees.not-reserves").length == 0
+  if $("[data-event-id='#{eventId}'] ul.event-attendees.not-reserves").length == 0 and  data.attendees.length > 0
     html += '</ul>'
     $("[data-event-id='#{eventId}'] div.event-attendees.not-reserves").html html
   else
@@ -53,7 +53,7 @@ window.reloadUsers = (data) ->
 
   i = 0
   html = ''
-  if $("[data-event-id='#{eventId}'] ul.event-attendees.reserves").length == 0
+  if $("[data-event-id='#{eventId}'] ul.event-attendees.reserves").length == 0 and data.reserves.length > 0
     html += '<h5>Reserves</h5>'
     html += "<ul class='event-attendees reserves'>"
   while data.reserves.length > i
@@ -62,7 +62,7 @@ window.reloadUsers = (data) ->
     html += "<li class='event-attendee' data-attendee='#{user.id}'><img src='#{hash}' alt='#{user.name}'><span class='attendee-name'>#{user.name}</span></li>"
     i++
 
-  if $("[data-event-id='#{eventId}'] ul.event-attendees.reserves").length == 0
+  if $("[data-event-id='#{eventId}'] ul.event-attendees.reserves").length == 0 and data.reserves.length > 0
     html += '</ul>'
     $("[data-event-id='#{eventId}'] div.event-attendees.reserves").html html
   else

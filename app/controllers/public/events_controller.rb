@@ -3,11 +3,6 @@ class Public::EventsController < PublicController
   layout false, except: [:index, :show_event]
 
   def index
-    # @events = Event.preload(reserves: :user, attendees: :user)
-    #           .where('starts_at > ?', Time.now)
-    #           .order(starts_at: :asc)
-    #           .paginate(page: params[:page], per_page: 10)
-
     @events = Event.preload(event_attendees: :user)
               .where('starts_at > ?', Time.now)
               .order(starts_at: :asc)
