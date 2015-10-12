@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sitename
-    settings.site_name
+    settings and settings.site_name != "" ? settings.site_name : nil
   end
+
 end
