@@ -38,26 +38,6 @@ class Event < ActiveRecord::Base
   validates :name, presence: true
   validates :starts_at, presence: true
 
-  def remove_attendees
-    self.event_attendees.each { |e| e.destroy }
-  end
-
-  # Save attendees to event
-  # attendees = params[:attendees] => {attendees: [], reserves: []}
-  def save_attendees attendees
-    users = []
-    if attendees[:attendees].present?
-      users << add_attendees_to_array(attendees[:attendees], false)
-    end
-    if attendees[:reserves].present?
-      users << add_attendees_to_array(attendees[:reserves], true)
-    end
-    if users.size > 0
-      self.event_attendees.create(users)
-      self.save
-    end
-  end
-
   def add_user user
     max = self.maximum_event_attendees
     if self.event_attendees.size >= max
@@ -79,35 +59,8 @@ class Event < ActiveRecord::Base
     self.save_users
   end
 
-  def update_attendees attendees
-    existing_user_ids = self.event_attendees.pluck(:id)
-    users = []
-    if attendees[:attendees].present?
-      users << sort_through_users_to_be_updated(false, 'attendees', attendees, existing_user_ids)
-    end
-    if attendees[:reserves].present?
-      users << sort_through_users_to_be_updated(true, 'reserves', attendees, existing_user_ids)
-    end
-    self.event_attendees.create(users)
-    self.save
-  end
-
-  def sort_through_users_to_be_updated reserve, array_name, attendees, existing_user_ids
-    users = []
-    users_to_be_deleted = []
-    attendees[array_name].each do |attendee|
-      if attendee.in?(existing_user_ids)
-        users_to_be_deleted.push attendee
-      else
-        users << add_attendees_to_array(attendees[array_name], reserve)
-      end
-    end
-    users_to_be_deleted.each(&:destroy_attendees)
-    users
-  end
-
-  def destroy_attendees id
-    EventAttendee.find(id).destroy
+  def rearrange_users
+    self.reserves.order(id: :asc).first.update_attribute(:reserve, false)
   end
 
   def save_users
@@ -116,19 +69,6 @@ class Event < ActiveRecord::Base
     else
       self.errors.messages.to_json
     end
-  end
-
-  def rearrange_users
-    self.reserves.order(id: :asc).first.update_attribute(:reserve, false)
-  end
-
-  def add_attendees_to_array attendees, reserve
-    users = []
-    attendees.each do |user_id|
-      user = { event_id: self.id, user_id: user_id, reserve: reserve }
-      users << user
-    end
-    users
   end
 
 end

@@ -4,7 +4,7 @@ class Admin::EventsController < AdminController
 
   def index
     @events = Event.preload(event_attendees: :user)
-              .where('starts_at > ?', Time.now)
+              .where('starts_at >= ?', Time.now)
               .order(starts_at: :asc)
               .paginate(page: params[:page], per_page: 10)
   end
@@ -25,11 +25,8 @@ class Admin::EventsController < AdminController
     @event = Event.create(event_params)
     @users = User.all
     if @event.save
-      if params['attendees'].present?
-        @event.save_attendees params['attendees']
-      end
       flash[:notice] = 'Changes saved'
-      redirect_to admin_events_path
+      redirect_to edit_admin_event_path @event
     else
       render :new
     end
@@ -40,7 +37,7 @@ class Admin::EventsController < AdminController
   end
 
   def edit
-    @event = Event.preload(attendees: :user, reserves: :user).find(params[:id])
+    @event = @events = Event.preload(event_attendees: :user).find(params[:id])
     @users = User.not_attending(attendees_ids(params[:id]))
   end
 
@@ -48,11 +45,6 @@ class Admin::EventsController < AdminController
     @event = Event.find(params[:id])
     @users = User.all
     if @event.update(event_params)
-      # if params['attendees'].present?
-      #   @event.update_attendees params['attendees']
-      # else
-      #   @event.remove_attendees
-      # end
       flash[:notice] = 'Changes saved'
       redirect_to admin_events_path
     else

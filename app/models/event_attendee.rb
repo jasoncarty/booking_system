@@ -18,7 +18,7 @@ class EventAttendee < ActiveRecord::Base
   belongs_to :event
 
   # Model validations
-  validates :user_id, presence: true, uniqueness: { scope: :event_id }
+  #validates :user_id, presence: true, uniqueness: { scope: :event_id }
 
   # Scopes
   default_scope -> { order(id: :asc ) }

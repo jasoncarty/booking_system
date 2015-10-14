@@ -25,43 +25,43 @@
     = f.label :maximum_event_attendees
     = f.number_field :maximum_event_attendees, class: 'form-control'
 
-  .form-group
-    .hidden
-      .hidden-attendees
-        select(multiple="true" name="event[attendee_user_ids][]" id="event_attendees")
-      .hidden-reserves
-        select(multiple="true" name="event[reserve_user_ids][]" id="event_reserves")
+  - unless @event.new_record?
+    .form-group
+      - reserves, attendees = @event.event_attendees.to_a.partition(&:reserve)
+      .hidden
+        = f.select :attendee_user_ids, attendees.map {|x| [x.user.name, x.user.id]}, {}, :multiple => true, id: "event_attendees"
+        = f.select :reserve_user_ids, reserves.map {|x| [x.user.name, x.user.id]}, {}, :multiple => true, id: "event_reserves"
 
-
-  .row
-    .col-sm-4
-      label Invite people to attend
-      ul.user-list.form-control.users
-        - @users.each do |user|
-          li(data-id=user.id data-name=user.name )
-            .user-wrapper
-              =user.name
-              .btn.btn-success.btn-inline.btn-sm.pull-right Add
-
-    .col-sm-4
-      label Attendees
-      ul.user-list.form-control.attendees
-        - if @event.attendees and @event.attendees.length > 0
-          - @event.attendees.each do |attendee|
-            li.event-attendee(data-id=attendee.user.id data-name=attendee.user.name)
+    .row
+      .col-sm-4
+        label Invite people to attend
+        ul.user-list.form-control.users
+          - @users.each do |user|
+            li(data-id=user.id data-name=user.name )
               .user-wrapper
-                =attendee.user.name
-                .btn.btn-danger.btn-inline.btn-sm.pull-right Remove
+                =user.name
+                .btn.btn-success.btn-inline.btn-sm.pull-right Add
 
-    .col-sm-4
-      label Reserves
-      ul.user-list.form-control.reserves
-        - if @event.reserves and @event.reserves.length > 0
-          - @event.reserves.each do |reserve|
-            li.event-attendee(data-id=reserve.user.id data-name=reserve.user.name)
-              .user-wrapper
-                = reserve.user.name
-                .btn.btn-danger.btn-inline.btn-sm.pull-right Remove
+
+      .col-sm-4
+        label Attendees
+        ul.user-list.form-control.attendees
+          - if attendees.length > 0
+            - attendees.each do |attendee|
+              li.event-attendee(data-id=attendee.user.id data-name=attendee.user.name)
+                .user-wrapper
+                  =attendee.user.name
+                  .btn.btn-danger.btn-inline.btn-sm.pull-right Remove
+
+      .col-sm-4
+        label Reserves
+        ul.user-list.form-control.reserves
+          - if reserves and reserves.length > 0
+            - reserves.each do |reserve|
+              li.event-attendee(data-id=reserve.user.id data-name=reserve.user.name)
+                .user-wrapper
+                  = reserve.user.name
+                  .btn.btn-danger.btn-inline.btn-sm.pull-right Remove
 
   .form-group
     = f.submit 'Save changes', class: 'btn btn-blue', id: 'save-event'

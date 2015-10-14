@@ -57,12 +57,13 @@ ready = ->
   $('#event_maximum_event_attendees').on 'input', ->
     max_attendees = $('#event_maximum_event_attendees').val()
     unless $(this).val() == ""
+      fixAttendeesAndReservesAccordingToMaxAttendees()
       sortOutAttendeesAndReserves()
 
   max_attendees = $('#event_maximum_event_attendees').val()
 
   if $('#event_maximum_event_attendees').length > 0
-    sortOutAttendeesAndReserves()
+    fixAttendeesAndReservesAccordingToMaxAttendees()
 
 addUser = ($el) ->
   li   = $el.parent('.user-wrapper').parent('li')
@@ -157,34 +158,39 @@ addEventsToReserves = ($el) ->
   removeReserve $el
 
 addUsersAndReserves = ->
+  $('#event_attendees').html('')
+  $('#event_reserves').html('')
   if attendees.length > 0
     for attendee in attendees
       html = "<option selected value='#{attendee}'>#{attendee}</option>"
-      $('.hidden-attendees select').append(html)
+      $('#event_attendees').append(html)
   if reserves.length > 0
     for reserve in reserves
       html = "<option selected value='#{reserve}'>#{reserve}</option>"
-      $('.hidden-reserves select').append(html)
+      $('#event_reserves').append(html)
 
 sortOutAttendeesAndReserves = ->
+  if max_attendees > attendees.length and reserves.length > 0
+    amount_to_add = max_attendees - attendees.length
+    $("ul.reserves li").each (index, value) ->
+      removeReserve $(this).find('.user-wrapper').find('.btn')
+      return false if index == ( amount_to_add - 1 )
+  addUsersAndReserves()
+
+fixAttendeesAndReservesAccordingToMaxAttendees = ->
   amount_to_remove = attendees.length - max_attendees
   if attendees.length > max_attendees and reserves.length > 0
+
     $($("ul.attendees li").get().reverse()).each (index, value) ->
       addUser $(this).find('.user-wrapper').find('.btn')
       attendees.splice(attendees.indexOf($(this).data('id')), 1)
       return false if index == ( amount_to_remove - 1 )
 
   else if attendees.length > max_attendees and reserves.length == 0
+
     $($("ul.attendees li").get().reverse()).each (index, value) ->
       removeAttendee $(this).find('.user-wrapper').find('.btn')
       return false if index == ( amount_to_remove - 1 )
-
-  else if max_attendees > attendees.length and reserves.length > 0
-    amount_to_add = max_attendees - attendees.length
-    $("ul.reserves li").each (index, value) ->
-      removeReserve $(this).find('.user-wrapper').find('.btn')
-      return false if index == ( amount_to_add - 1 )
-  addUsersAndReserves()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
