@@ -1,7 +1,9 @@
 class UserMailer < ApplicationMailer
 
-  def new_user user
+  default from: "noreply@bookingsystem.com"
+  def new_user user, sitename
     @user = user
-    mail to: user.email, subject: "Welcome to the Golf booking system"
+    @sitename = sitename
+    mail to: user.email, subject: "Welcome to the #{sitename}"
   end
 end

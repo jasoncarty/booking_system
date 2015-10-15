@@ -5,7 +5,22 @@ class Public::UsersController < PublicController
   def verify
     session[:user_id] = nil
   end
-  
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(current_user.id)
+    @user.validate_password = false if params[:user][:password].blank?
+    if @user.update(user_params)
+      flash[:notice] = 'Changed saved'
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
+
   def verification
     @user = User.find_by_verification_token(params[:verfication_token])
     @token = params[:verfication_token]
@@ -36,6 +51,6 @@ class Public::UsersController < PublicController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confrimation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end

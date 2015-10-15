@@ -1,17 +1,17 @@
 .well.log-in
-  h1 Golf Booking System
+  h1 = sitename
   h2 Complete registration
   p Almost done, just fill in this form.
 
   = form_tag user_verification_path
     - if @errors
-      .form-group  
+      .form-group
         .alert.alert-danger
           - for error in @errors.full_messages
             = error
             br
     - elsif @error
-      .form-group  
+      .form-group
         .alert.alert-danger
           = @error
 

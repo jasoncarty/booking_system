@@ -32,7 +32,8 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'puma'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.1'
   gem "factory_girl_rails", "~> 4.0"
+  gem 'database_cleaner', '~> 1.3.0'
 end
 

@@ -1,0 +1,6 @@
+<% if @result == 'success' %>
+  $('[data-user-id="<%= @user.id %>"]').fadeOut(300);
+<% else %>
+  var html = "<div class='alert alert-danger'><%= @result.to_s %></div>"
+  $('[data-user-id="<%= @user.id %>"]').append(html);
+<% end %>

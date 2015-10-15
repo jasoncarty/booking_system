@@ -31,9 +31,13 @@ Rails.application.routes.draw do
   root 'public/events#index'
 
   # Sessions
-  get '/login',     to: 'sessions#new', as: 'login'
+  get '/login',     to: 'sessions#new',     as: 'login'
   post '/login',    to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  # Confirmations
+  get '/confirmations_new',     to: 'confirmations#new',    as: 'confirmation_new'
+  post '/confirmations_create', to: 'confirmations#create', as: 'confirmation_create'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

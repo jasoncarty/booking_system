@@ -27,7 +27,11 @@ class ApplicationController < ActionController::Base
   end
 
   def sitename
-    settings and settings.site_name != "" ? settings.site_name : 'Booking System'
+    if settings and settings.site_name != ""
+      name = settings.site_name
+    else
+      name = 'Booking System'
+    end
   end
 
 end
