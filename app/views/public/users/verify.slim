@@ -23,7 +23,7 @@
 
     .form-group
       = password_field_tag "user[password_confirmation]", "", class: 'form-control', placeholder: 'Confirm password'
-      = hidden_field_tag "verfication_token", params[:token].nil? ? @token : params[:token]
+      = hidden_field_tag "verification_token", params[:token].nil? ? @token : params[:token]
 
     .form-group
       = submit_tag "Save", class: 'btn btn-blue'
