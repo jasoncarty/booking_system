@@ -1,0 +1,25 @@
+.well.log-in
+  h1 = sitename
+  p Please add your new password.
+
+  = form_tag password_update_path
+    - if flash[:alert]
+      .alert.alert-danger
+        = flash[:alert]
+    - if flash[:notice]
+      .alert.alert-info
+        = flash[:notice]
+
+    .form-group
+      = password_field_tag "password", "", class: 'form-control', placeholder: 'Password'
+
+    .form-group
+      = password_field_tag "password_confirmation", "", class: 'form-control', placeholder: 'Password confirmation'
+    = hidden_field_tag 'password_reset_token', params[:password_reset_token]
+
+    .form-group
+      = submit_tag "Save", class: 'btn btn-blue'
+    br
+    .row
+      .col-sm-12
+        = link_to 'Back to Login page', login_path

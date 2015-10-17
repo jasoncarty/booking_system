@@ -1,8 +1,8 @@
 .well.log-in
   h1 = sitename
-  p Please fill in your email address so we can send another confirmation email.
+  p Please fill in your email address in order to change your password.
 
-  = form_tag confirmation_create_path
+  = form_tag password_create_path
     - if flash[:alert]
       .alert.alert-danger
         = flash[:alert]

@@ -39,6 +39,12 @@ Rails.application.routes.draw do
   get '/confirmations_new',     to: 'confirmations#new',    as: 'confirmation_new'
   post '/confirmations_create', to: 'confirmations#create', as: 'confirmation_create'
 
+  # Passwords
+  get '/passwords_new',     to: 'passwords#new',    as: 'password_new'
+  post '/passwords_create', to: 'passwords#create', as: 'password_create'
+  get '/passwords_reset/:password_reset_token', to: 'passwords#reset', as: 'password_reset'
+  post '/passwords_update', to: 'passwords#update', as: 'password_update'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

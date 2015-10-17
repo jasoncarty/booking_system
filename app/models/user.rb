@@ -53,8 +53,14 @@ class User < ActiveRecord::Base
     self.verification_sent_at = Time.now
   end
 
+  def add_password_token
+    self.password_reset_token = generate_token
+    self.password_reset_token_sent_at = Time.now
+  end
+
   def generate_token
     token = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
+
 
 end
