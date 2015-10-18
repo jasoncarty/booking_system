@@ -70,6 +70,12 @@ describe Admin::UsersController do
       email.subject.should include 'Welcome to the'
       email.to.should == ['test@test.com']
     end
+
+    it 'renders new template if user not valid' do
+      login_user(admin)
+      post :create, user: { name: 'Test Testsson', admin: false }
+      response.should render_template(:new)
+    end
   end
 
   describe 'GET #edit' do
@@ -108,6 +114,12 @@ describe Admin::UsersController do
       post :update, id: user, user: { name: 'Test Johnsson'}
       response.should redirect_to(admin_users_url)
       user.reload.name.should == 'Test Johnsson'
+    end
+
+    it 'renders new template if user not valid' do
+      login_user(admin)
+      post :update, id: user, user: { name: 'Test Testsson', email: '', admin: false }
+      response.should render_template(:edit)
     end
   end
 

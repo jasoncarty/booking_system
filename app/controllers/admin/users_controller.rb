@@ -38,12 +38,8 @@ class Admin::UsersController < AdminController
 
   def destroy
     @user = User.find params[:id]
-    if @user.destroy
-      @result = 'success'
-    else
-      @result = @user.errors.messages
-    end
-    @result
+    @user.destroy
+    @result = 'success'
   end
 
   private

@@ -10,11 +10,11 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
     - if @current_user
       .menu
         ul
-          li class="#{active_link?(events_path)} #{active_link?(root_path)}"
+          li class="#{active_link?(events_url)} #{active_link?(root_url)}"
             = link_to 'Events', events_path
-          li class="#{active_link?(my_calendar_path)}"
+          li class="#{active_link?(my_calendar_url)}"
             = link_to 'My Calendar', my_calendar_path
-          li class="#{active_link?(edit_user_path(current_user))}"
+          li class="#{active_link?(edit_user_url(current_user))}"
             = link_to "My Profile", edit_user_path(current_user)
           li
             - if admin?

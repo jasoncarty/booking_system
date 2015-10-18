@@ -7,16 +7,8 @@ module ApplicationHelper
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=wavatar"
   end
 
-  def admin?
-    @current_user.role == 'admin'
-  end
-
   def active_link?(link)
-    current_page?(link) ? 'active' : ''
-  end
-
-  def generate_token
-    token = Digest::SHA1.hexdigest([Time.now, rand].join)
+    request.original_url == link ? 'active' : ''
   end
 
 end

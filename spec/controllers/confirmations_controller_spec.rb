@@ -14,10 +14,17 @@ describe ConfirmationsController do
       email.to.should == ["jason@email.com"]
     end
 
-    it 'redirects to root if account is already confirmed' do
+    it 'redirects to confirmation_new_path if account is already confirmed' do
       post :create, email: admin.email
       flash[:notice].should be_present
       flash[:notice].should == "Your account has already been confirmed!"
+      response.should redirect_to(confirmation_new_path)
+    end
+
+    it 'redirects to confirmation_new_path if email not found' do
+      post :create, email: 'unknown@email.com'
+      flash[:alert].should == "Email not found in system"
+      response.should redirect_to(confirmation_new_path)
     end
   end
 
@@ -28,6 +35,5 @@ describe ConfirmationsController do
       get :new, user: non_confirmed_user
       response.should be_success
     end
-
   end
 end

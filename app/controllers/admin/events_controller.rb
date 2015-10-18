@@ -68,12 +68,8 @@ class Admin::EventsController < AdminController
 
   def destroy
     @event = Event.find params[:id]
-    if @event.destroy
-      @result = 'success'
-    else
-      @result = @event.errors.messages
-    end
-    @result
+    @event.destroy
+    @result = 'success'
   end
 
   def attendees_ids(event_id)

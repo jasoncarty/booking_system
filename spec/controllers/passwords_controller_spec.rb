@@ -3,6 +3,7 @@ require "spec_helper"
 describe PasswordsController do
 
 let(:user) { FactoryGirl.create(:user) }
+let(:non_confirmed_user) { FactoryGirl.create(:non_confirmed_user) }
 
   describe 'POST #create' do
     it 'sends new password email to user' do
@@ -28,6 +29,14 @@ let(:user) { FactoryGirl.create(:user) }
       user.reload.password_reset_token.should == nil
       response.should redirect_to(:back)
     end
+
+    it 'redirects to login path if account has not been confirmed' do
+      non_confirmed_user
+      @request.env['HTTP_REFERER'] = password_create_url
+      post :create, email: non_confirmed_user.email
+      response.should redirect_to(login_path)
+    end
+
   end
 
   describe 'POST #update' do

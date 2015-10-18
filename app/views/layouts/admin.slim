@@ -9,19 +9,19 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
     - if @current_user
       .menu
         ul
-          li class="#{active_link?(admin_events_path)} #{active_link?(admin_root_path)}"
+          li class="#{active_link?(admin_events_url)} #{active_link?(admin_root_url)}"
             = link_to 'Events', admin_events_path
-          li class="#{active_link?(old_events_admin_events_path)}"
+          li class="#{active_link?(old_events_admin_events_url)}"
             = link_to 'Old Events', old_events_admin_events_path
-          li class="#{active_link?(new_admin_event_path)}"
+          li class="#{active_link?(new_admin_event_url)}"
             = link_to 'New Event', new_admin_event_path
-          li class="#{active_link?(admin_users_path)}"
+          li class="#{active_link?(admin_users_url)}"
             = link_to 'Members', admin_users_path
-          li class="#{active_link?(new_admin_user_path)}"
+          li class="#{active_link?(new_admin_user_url)}"
             = link_to 'New Member', new_admin_user_path
-          li class="#{active_link?(admin_site_settings_path)}"
+          li class="#{active_link?(admin_site_settings_url)}"
             = link_to "Settings", admin_site_settings_path
-          li class="#{active_link?(root_path)}"
+          li class="#{active_link?(root_url)}"
             = link_to 'Public', root_path
           li
             = link_to 'Log out', logout_path, method: 'delete'

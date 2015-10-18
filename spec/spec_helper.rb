@@ -22,7 +22,7 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
-  config.include SpecTestHelper, :type => :controller
+  config.include SpecTestHelper
   # clean database before running tests
   config.before(:each) do
     DatabaseCleaner.clean_with(:truncation)

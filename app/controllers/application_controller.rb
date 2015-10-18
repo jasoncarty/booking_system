@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-  helper_method :current_user, :default_maximum_event_attendees, :settings, :sitename
+  helper_method :current_user, :default_maximum_event_attendees, :settings, :sitename, :admin?
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -32,6 +32,10 @@ class ApplicationController < ActionController::Base
     else
       name = 'Booking System'
     end
+  end
+
+  def admin?
+    current_user.role == 'admin'
   end
 
 end
