@@ -2,5 +2,23 @@
 
 [![Build Status](https://travis-ci.org/jasoncarty/booking_system_ruby.svg?branch=master)](https://travis-ci.org/jasoncarty/booking_system_ruby)
 
-# booking_system
-An app for booking events
+#Booking system
+
+An application for creating events and inviting guests to these events.
+
+##Development
+
+Ruby Version 2.2.3
+Rails Version 4.2.1
+
+```bash
+git clone https://github.com/jasoncarty/booking_system_ruby.git
+bundle
+bundle exec rake db:create db:migrate db:seed
+```
+
+To start the app run:
+
+```bash
+rails s
+```
