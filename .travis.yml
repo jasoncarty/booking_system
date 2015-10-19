@@ -1,1 +1,4 @@
 language: ruby
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database booking_system_test' -U postgres
