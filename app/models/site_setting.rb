@@ -11,5 +11,7 @@
 
 class SiteSetting < ActiveRecord::Base
 
+  # Model validations
+  validates :maximum_event_attendees, numericality: { greater_than: 0 }
 
 end

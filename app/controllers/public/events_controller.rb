@@ -16,10 +16,6 @@ class Public::EventsController < PublicController
     @attendances = current_user.event_ids
   end
 
-  def show_event
-    @event = Event.preload(reserves: :user, attendees: :user).find(params[:id])
-  end
-
   def book
     @event  = Event.preload(reserves: :user, attendees: :user).find(params[:id])
     @result = @event.add_user(current_user)
