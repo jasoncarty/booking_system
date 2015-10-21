@@ -3,7 +3,7 @@ class Admin::UsersController < AdminController
   layout false, only: :destroy
 
   def index
-    @users = User.all
+    @users = User.all.order(name: :asc)
   end
 
   def new

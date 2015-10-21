@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       redirect_to :root
     else
       redirect_to login_path
+      flash[:alert] = "Incorrect credentials"
     end
   end
 

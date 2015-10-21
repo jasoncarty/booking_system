@@ -6,6 +6,10 @@ max_attendees = $('[data-event-max]').data('event-max')
 
 ready = ->
 
+  # initiate member search
+  $('#member-search').on 'keyup', ->
+    searchTheMembers $(this).val().toLowerCase()
+
   # initiate menu
   $('.menu-opener').on 'click', ->
     if $('.menu').hasClass('open')
@@ -191,6 +195,15 @@ fixAttendeesAndReservesAccordingToMaxAttendees = ->
     $($("ul.attendees li").get().reverse()).each (index, value) ->
       removeAttendee $(this).find('.user-wrapper').find('.btn')
       return false if index == ( amount_to_remove - 1 )
+
+searchTheMembers = (val) ->
+  $("[data-user-id]").hide().removeClass('showing')
+  $(".no-users").hide()
+  $("[data-user-id]").each ->
+    if $(this).data('info').toLowerCase().indexOf(val) != -1
+      $(this).show().addClass('showing')
+  if $("[data-user-id].showing").length == 0
+    $(".no-users").show()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

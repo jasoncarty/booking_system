@@ -4,6 +4,7 @@
   h1
     = sitename
   = form_tag login_path, class: 'form-horizontal' do
+    = render "shared/flash"
 
     .form-group
       .col-sm-12

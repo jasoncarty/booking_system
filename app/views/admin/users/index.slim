@@ -1,7 +1,12 @@
 h1 Members
+.spacer-25
+  input.form-control (id="member-search" placeholder="Search")
+.spacer-25
+  .no-users
+    p No users found matching the search criteria
 - @users.each do |user|
 
-  .user data-user-id=user.id
+  .user.spacer-25 data-user-id=user.id data-info="#{user.name} #{user.email}"
     a(href=edit_admin_user_path(user))
       .user-img
         = image_tag avatar_url(user, 60), alt: user.name
@@ -13,3 +18,4 @@ h1 Members
       - unless user == current_user
         .delete-link
           = link_to "<icon class='glyphicon glyphicon-trash'></i>".html_safe, admin_user_path(user),remote: true,  method: :delete, data: { confirm: 'Are you sure you want to delete this user?' }
+
