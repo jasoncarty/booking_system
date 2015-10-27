@@ -92,6 +92,11 @@ Rails.application.configure do
   :email => {
     :email_prefix => "[Booking system ruby] ",
     :sender_address => %{"notifier" <notifier@example.com>},
-    :exception_recipients => %w{jason@jcartydesign.com}
+    :exception_recipients => %w{jason@jcartydesign.com},
+    :delivery_method => :smtp,
+    :smtp_settings => {
+      :user_name => ENV['mail_email'],
+      :password => ENV['mail_password'],
+    }
   }
 end
