@@ -17,3 +17,6 @@
 /tmp
 /coverage
 .coveralls.yml
+
+# Ignore application configuration
+/config/application.yml

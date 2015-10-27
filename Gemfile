@@ -25,6 +25,7 @@ group :development do
   gem "letter_opener"
   gem 'annotate'
   gem 'coveralls', require: false
+  gem 'figaro'
 end
 
 group :development, :test do
@@ -36,6 +37,10 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner', '~> 1.3.0'
   gem 'pry-rails'
+end
+
+group :production do
+  gem 'exception_notification'
 end
 
 group :test do

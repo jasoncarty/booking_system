@@ -76,4 +76,22 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'golf-booking-system.herokuapp.com',
+    user_name:            ENV['mail_email'],
+    password:             ENV['mail_password'],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
+
+  config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[Booking system ruby] ",
+    :sender_address => %{"notifier" <notifier@example.com>},
+    :exception_recipients => %w{jason@jcartydesign.com}
+  }
 end
