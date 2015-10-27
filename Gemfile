@@ -16,6 +16,7 @@ gem 'slim'
 gem 'quiet_assets'
 gem "simple_calendar", "~> 1.1.0"
 gem 'will_paginate', '~> 3.0.6'
+gem 'puma'
 
 # Assets
 gem 'bootstrap-sass', '~> 3.3.4'
@@ -34,7 +35,7 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'puma'
+
   gem 'rspec-rails', '~> 3.1'
   gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner', '~> 1.3.0'
