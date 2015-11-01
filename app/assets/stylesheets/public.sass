@@ -83,13 +83,14 @@ body
 // NAV
 .navbar
   position: fixed
-  z-index: 2
+  z-index: 3
   display: flex
   display: -webkit-box
   display: -ms-flexbox
   display: -webkit-flex
   align-items: center
   -webkit-align-items: center
+  -ms-flex-align: center
   background: $blue
   height: 56px
   width: 100%
@@ -104,6 +105,7 @@ body
     cursor: pointer
     .icon-bar
       display: block
+      border-top: 2px solid #fff
       border-top: 2px solid rgba(255,255,255, 0.5)
       transition: border-top 0.5s
       margin-bottom: 4px
@@ -288,22 +290,41 @@ ul.event-attendees
           height: 24px
           width: 24px
           padding-top: 2px
-          padding-left: 1px
+          padding-left: 5px
           color: #fff
 
-  perspective: 2000
+
   -webkit-perspective: 2000
   -moz-perspective: 2000
+  -ms-perspective: 2000
+  -o-perspective: 2000
+  perspective: 2000
   width: 100%
   height: 621px
 
-
   .flipper
+    -webkit-transition: 0.6s
+    -moz-transition: 0.6s
+    -ms-transition: 0.6s
+    -o-transition: 0.6s
     transition: 0.6s
+    -webkit-transform-style: preserve-3d
+    -moz-transform-style: preserve-3d
+    -o-transform-style: preserve-3d
+    -ms-transform-style: preserve-3d
     transform-style: preserve-3d
     position: relative
   .flipper.flip
     transform: rotateY(180deg)
+    -webkit-transform: rotateY(180deg)
+    -moz-transform: rotateY(180deg)
+    -o-transform: rotateY(180deg)
+    .front
+      -ms-transform: rotateY(180deg)
+    .back
+      -ms-transform: rotateY(-180deg)
+      -ms-backface-visibility: visible
+
   .front, .back
     background: #fff
     box-shadow: 1px 1px 10px rgb(195, 195, 191)
@@ -311,15 +332,25 @@ ul.event-attendees
     min-height: 621px
     transform: height 0.6s
     backface-visibility: hidden
+    -webkit-backface-visibility: hidden
+    -moz-backface-visibility: hidden
+    -o-backface-visibility: hidden
+    -ms-backface-visibility: hidden
     position: absolute
     top: 0
     left: 0
   .front
     z-index: 2
+    -webkit-transform: rotateY(0deg)
+    -moz-transform: rotateY(0deg)
+    -o-transform: rotateY(0deg)
     transform: rotateY(0deg)
   .back
     transform: rotateY(180deg)
-
+    -webkit-transform: rotateY(180deg)
+    -moz-transform: rotateY(180deg)
+    -o-transform: rotateY(180deg)
+    -ms-transform: rotateY(180deg)
 
   .event-wrapper
     padding: 15px

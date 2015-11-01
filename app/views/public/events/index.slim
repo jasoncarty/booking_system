@@ -38,5 +38,6 @@
           - else
             = link_to "Join in", book_events_path(event), class: "btn btn-blue btn-center", data: {remote: true, booking: 'book', event_id: event.id}, method: 'post'
 
+
 .spacer-25
   = will_paginate @events

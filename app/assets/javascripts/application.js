@@ -18,6 +18,7 @@
 //= require underscore
 //= require jquery_ujs
 //= require jquery.slugify
+//= require placeholder-enhanced.min
 // require turbolinks
 
 
