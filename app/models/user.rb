@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   # Callbacks
   before_create :add_verify_token
 
+
   def validate_password?
     if validate_password.nil?
       return true
@@ -61,6 +62,5 @@ class User < ActiveRecord::Base
   def generate_token
     token = Digest::SHA1.hexdigest([Time.now, rand].join)
   end
-
 
 end
