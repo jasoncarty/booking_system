@@ -1,6 +1,11 @@
 = form_for [user] do |f|
 
   .form-group
+    = image_tag avatar_url(user, 100), alt: user.name
+    p
+      a(href="http://gravatar.com/emails" target="_blank") Edit your profile picture
+
+  .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control'
 
