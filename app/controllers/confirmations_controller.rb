@@ -11,6 +11,7 @@ class ConfirmationsController < ApplicationController
         redirect_to confirmation_new_path
       else
         @user.add_verify_token
+        @user.save
         UserMailer.new_user(@user, sitename).deliver_now
         flash[:notice] = "An email has been sent to you"
         redirect_to confirmation_new_path
