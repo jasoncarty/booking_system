@@ -14,6 +14,12 @@ describe ConfirmationsController do
       email.to.should == ["jason@email.com"]
     end
 
+    it 'saves a confirmation token to the user' do
+      verification_token = non_confirmed_user.verification_token
+      post :create, email: non_confirmed_user.email
+      non_confirmed_user.reload.verification_token.should_not == verification_token
+    end
+
     it 'redirects to confirmation_new_path if account is already confirmed' do
       post :create, email: admin.email
       flash[:notice].should be_present

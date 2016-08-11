@@ -63,6 +63,13 @@ describe Admin::UsersController do
       User.all.reload.count.should == count + 1
     end
 
+    it 'saves a confirmation token to the user' do
+      login_user(admin)
+      post :create, user: { name: 'Test Testsson', email: 'test@test.com', admin: false }
+      User.last.name.should == 'Test Testsson'
+      User.last.verification_token.should_not be nil
+    end
+
     it 'sends a confirmation email to user after creation' do
       login_user(admin)
       post :create, user: { name: 'Test Testsson', email: 'test@test.com', admin: false }
