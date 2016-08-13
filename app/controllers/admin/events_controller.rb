@@ -18,12 +18,10 @@ class Admin::EventsController < AdminController
 
   def new
     @event = Event.new
-    @users = User.all
   end
 
   def create
     @event = Event.create(event_params)
-    @users = User.all
     if @event.save
       flash[:notice] = 'Changes saved'
       redirect_to edit_admin_event_path @event
@@ -37,7 +35,7 @@ class Admin::EventsController < AdminController
   end
 
   def edit
-    @event = @events = Event.preload(event_attendees: :user).find(params[:id])
+    @event = Event.preload(event_attendees: :user).find(params[:id])
     @users = User.not_attending(attendees_ids(params[:id]))
   end
 

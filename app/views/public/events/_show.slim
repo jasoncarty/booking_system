@@ -17,7 +17,7 @@
   .row
     .col-sm-6.spacer-10
       b Starts at:
-      = " #{@event.starts_at.strftime '%y-%m-%d %H:%M'}"
+      = " #{@event.starts_at.strftime '%y-%m-%d'}"
   .row
     .col-sm-12.spacer-25
       - reserves, attendees = @event.event_attendees.to_a.partition(&:reserve)

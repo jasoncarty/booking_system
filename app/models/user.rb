@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true, on: :update, if: :validate_password?
 
   # Model scopes
-  scope :not_attending, -> (attendees) { where("users.id NOT IN (#{attendees})") }
+  scope :not_attending, -> (attendees) { where("users.id NOT IN (#{attendees})").order(name: :asc) }
 
   # Callbacks
   before_create :add_verify_token

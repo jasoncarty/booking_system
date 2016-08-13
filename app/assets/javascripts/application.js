@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui/datepicker
 //= require bootstrap-sprockets
-//= require jquery.datetimepicker
 //= require select2
 //= require moment
 //= require underscore

@@ -24,7 +24,7 @@ ready = ->
           $('.menu').addClass('open')
 
   # initiate datepicker
-  $('.datetimepicker').datetimepicker
+  $('.datepicker').datepicker
     dateFormat: 'yy-mm-dd'
 
   #------------------------

@@ -21,7 +21,7 @@ gem 'puma'
 # Assets
 gem 'bootstrap-sass', '~> 3.3.4'
 gem "font-awesome-rails"
-gem 'jquery-datetimepicker-rails'
+gem 'jquery-ui-rails'
 gem "select2-rails"
 
 group :development do
