@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'events#index'
-    resources :users
+    resources :users do
+      get "resend_confirmation", to: "users#resend_confirmation", as: "resend_confirmation", on: :member
+    end
     resources :events do
       get "old_events", to: "events#old_events", as: "old_events", on: :member, on: :collection
     end

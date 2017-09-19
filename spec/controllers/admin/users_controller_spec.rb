@@ -85,6 +85,16 @@ describe Admin::UsersController do
     end
   end
 
+  describe 'GET #resend_confirmation' do
+    it 'should send a confirmation email' do
+      login_user(admin)
+      get :resend_confirmation, id: user.id
+      email = ActionMailer::Base.deliveries.last
+      email.subject.should include 'Welcome to the'
+      email.to.should == [user.email]
+    end
+  end
+
   describe 'GET #edit' do
     it 'redirects non logged in users to log in' do
       get :edit, id: user

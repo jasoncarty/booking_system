@@ -26,6 +26,13 @@ class Admin::UsersController < AdminController
     @user = User.find(params[:id])
   end
 
+  def resend_confirmation
+    @user = User.find(params[:id])
+    UserMailer.new_user(@user, sitename).deliver_now
+    flash[:notice] = 'Confirmation sent'
+    redirect_to edit_admin_user_path(@user)
+  end
+
   def update
     @user = User.find(params[:id])
     @user.validate_password = false
