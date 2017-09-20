@@ -17,7 +17,7 @@
   .form-group
     = f.submit 'Save changes', class: 'btn btn-blue'
 
-- if !@user.confirmed
+- if @user.id && !@user.confirmed
   .row
     .col-sm-12
       = link_to "Resend confirmation", resend_confirmation_admin_user_path(@user), class: 'pull-right'
