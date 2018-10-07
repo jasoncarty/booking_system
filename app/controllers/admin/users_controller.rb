@@ -4,6 +4,7 @@ class Admin::UsersController < AdminController
 
   def index
     @users = User.all.order(name: :asc)
+    # TODO: add pagination and ajax search
   end
 
   def new

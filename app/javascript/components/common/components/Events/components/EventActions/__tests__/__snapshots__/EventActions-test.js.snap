@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventActions /> matches snapshot when admin section 1`] = `
+Array [
+  <DeleteEventButton
+    eventId={1}
+    onError={[Function]}
+    onSuccess={[Function]}
+  />,
+  <div
+    className="go-to-event-button"
+  >
+    <a
+      href="/admin/events/1/edit"
+    >
+      <i
+        className="glyphicon glyphicon-chevron-right"
+      />
+    </a>
+  </div>,
+]
+`;
+
+exports[`<EventActions /> matches snapshot when not admin section 1`] = `
+<div
+  className="row spacer-25 actions"
+>
+  <div
+    className="col-sm-12"
+  >
+    <CancelEventButton
+      id={1}
+      onError={[Function]}
+      onSuccess={[Function]}
+    />
+  </div>
+</div>
+`;

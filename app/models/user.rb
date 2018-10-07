@@ -17,7 +17,7 @@
 #  updated_at                   :datetime         not null
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
 
   attr_accessor :validate_password
 

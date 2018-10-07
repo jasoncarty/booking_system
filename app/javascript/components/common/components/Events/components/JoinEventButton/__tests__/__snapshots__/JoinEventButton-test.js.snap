@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<JoinEventButton/> matches snapshot with default props 1`] = `
+<button
+  className="btn btn-blue btn-center"
+  onClick={[Function]}
+  type="button"
+>
+  Join in
+</button>
+`;

@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery-ui/datepicker
+//= require jquery-ui/widgets/datepicker
 //= require bootstrap-sprockets
 //= require select2
 //= require moment
@@ -20,5 +20,3 @@
 //= require jquery.slugify
 //= require placeholder-enhanced.min
 // require turbolinks
-
-

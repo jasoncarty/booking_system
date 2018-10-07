@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe '#avatar_url' do
     it 'returns the gravatar url of the users email' do

@@ -1,5 +1,5 @@
 class AdminController < MainController
   layout 'admin'
 
-  before_filter :require_admin
+  before_action :require_admin
 end

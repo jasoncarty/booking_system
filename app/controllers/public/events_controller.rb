@@ -9,6 +9,14 @@ class Public::EventsController < PublicController
               .paginate(page: params[:page], per_page: 10)
 
     @attendances = current_user.event_ids
+    render component: 'common/components/Events/components/EventList',
+      props: {
+        events: @events.as_json(:include => {
+          :event_attendees => {:include => :user}
+        }),
+        attendances: current_user.event_ids,
+        adminSection: false
+      }
   end
 
   def show
@@ -19,11 +27,15 @@ class Public::EventsController < PublicController
   def book
     @event  = Event.preload(reserves: :user, attendees: :user).find(params[:id])
     @result = @event.add_user(current_user)
+    @attendances = current_user.event_ids
+    render json: { eventAttendees: @result, attendances: @attendances }
   end
 
   def cancel
     @event  = Event.preload(reserves: :user, attendees: :user).find(params[:id])
     @result = @event.remove_user(current_user)
+    @attendances = current_user.event_ids
+    render json: { eventAttendees: @result, attendances: @attendances }
   end
 
 end

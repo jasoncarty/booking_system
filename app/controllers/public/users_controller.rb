@@ -1,6 +1,6 @@
 class Public::UsersController < PublicController
 
-  skip_before_filter :authorize, only: [:verify, :verification]
+  skip_before_action :authorize, only: [:verify, :verification]
 
   # GET /users/verify/:token
   def verify

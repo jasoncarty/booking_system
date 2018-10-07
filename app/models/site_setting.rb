@@ -9,7 +9,7 @@
 #  updated_at              :datetime
 #
 
-class SiteSetting < ActiveRecord::Base
+class SiteSetting < ApplicationRecord
 
   # Model validations
   validates :maximum_event_attendees, numericality: { greater_than: 0 }

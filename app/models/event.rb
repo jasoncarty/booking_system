@@ -16,7 +16,7 @@
 #  maximum_event_attendees :integer          default(0)
 #
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   extend SimpleCalendar
   has_calendar
 
@@ -46,6 +46,7 @@ class Event < ActiveRecord::Base
       self.event_attendees.create(user_id: user.id, event_id: self.id, reserve: false)
     end
     self.save_users
+    self.event_attendees.as_json(:include => :user)
   end
 
   def remove_user user
@@ -57,6 +58,7 @@ class Event < ActiveRecord::Base
     end
     attendee.destroy
     self.save_users
+    self.event_attendees.as_json(:include => :user)
   end
 
   def rearrange_users
