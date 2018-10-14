@@ -90,7 +90,6 @@ class EditEvent extends Component {
     )
 
   render() {
-    console.log(this.props, '------------');
     return (
       <Fragment>
         <h1>Edit Event</h1>

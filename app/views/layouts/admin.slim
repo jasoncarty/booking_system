@@ -49,7 +49,9 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
       .main
         .container
           = render 'shared/flash'
+          = react_component('common/components/Main/components/Root', { currentUser: @current_user})
           = yield
+
     - else
       .container.not-logged-in
         = yield

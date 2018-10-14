@@ -25,6 +25,7 @@ gem 'jquery-ui-rails'
 gem "select2-rails"
 gem 'react-rails'
 gem 'webpacker'
+gem 'js-routes'
 
 group :development do
   gem "letter_opener"

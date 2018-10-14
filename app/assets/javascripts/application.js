@@ -20,3 +20,6 @@
 //= require jquery.slugify
 //= require placeholder-enhanced.min
 // require turbolinks
+//= require js-routes
+//= require routes/admin
+//= require routes/public
