@@ -46,7 +46,6 @@ class Event < ApplicationRecord
       self.event_attendees.create(user_id: user.id, event_id: self.id, reserve: false)
     end
     self.save_users
-    self.event_attendees.as_json(:include => :user)
   end
 
   def remove_user user
@@ -58,7 +57,6 @@ class Event < ApplicationRecord
     end
     attendee.destroy
     self.save_users
-    self.event_attendees.as_json(:include => :user)
   end
 
   def rearrange_users

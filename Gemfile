@@ -16,23 +16,18 @@ gem 'slim'
 gem "simple_calendar", "~> 1.1.0"
 gem 'will_paginate', '~> 3.0.6'
 gem 'puma'
-gem 'js-routes'
 
 # Assets
 gem 'bootstrap-sass', '~> 3.3.4'
 gem "font-awesome-rails"
 gem 'jquery-ui-rails'
 gem "select2-rails"
-gem 'react-rails'
-gem 'webpacker'
-gem 'js-routes'
 
 group :development do
   gem "letter_opener"
   gem 'annotate'
   gem 'coveralls', require: false
   gem 'figaro'
-  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do

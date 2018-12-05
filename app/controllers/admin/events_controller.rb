@@ -7,13 +7,6 @@ class Admin::EventsController < AdminController
               .where('starts_at >= ?', Time.now)
               .order(starts_at: :asc)
               .paginate(page: params[:page], per_page: 10)
-    render component: 'common/components/Events/components/EventList',
-      props: {
-        events: @events.as_json(:include => {
-          :event_attendees => {:include => :user}
-        }),
-        adminSection: true
-      }
   end
 
   def old_events
@@ -74,7 +67,6 @@ class Admin::EventsController < AdminController
   def destroy
     @event = Event.find params[:id]
     @event.destroy
-    render json: { result: 'success', eventId: params[:id] }
   end
 
   def attendees_ids(event_id)
