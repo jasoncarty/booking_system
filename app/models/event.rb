@@ -16,7 +16,7 @@
 #  maximum_event_attendees :integer          default(0)
 #
 
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   extend SimpleCalendar
   has_calendar
 

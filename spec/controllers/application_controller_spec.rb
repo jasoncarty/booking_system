@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe ApplicationController do
 
-  let (:site_setting) { FactoryGirl.create(:site_setting) }
-  let (:user) { FactoryGirl.create(:user) }
+  let (:site_setting) { FactoryBot.create(:site_setting) }
+  let (:user) { FactoryBot.create(:user) }
 
   describe '#default_maximum_event_attendees' do
     it 'returns the default_maximum_event_attendees' do

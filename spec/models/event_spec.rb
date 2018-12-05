@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Event do
-  let(:admin) { FactoryGirl.create(:admin) }
-  let(:user) { FactoryGirl.create(:user) }
-  let(:event) { FactoryGirl.create(:event) }
+  let(:admin) { FactoryBot.create(:admin) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:event) { FactoryBot.create(:event) }
 
   it 'adds a user' do
     count = event.event_attendees.size

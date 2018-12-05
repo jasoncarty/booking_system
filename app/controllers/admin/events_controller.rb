@@ -67,7 +67,6 @@ class Admin::EventsController < AdminController
   def destroy
     @event = Event.find params[:id]
     @event.destroy
-    @result = 'success'
   end
 
   def attendees_ids(event_id)

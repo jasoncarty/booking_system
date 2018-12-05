@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Public::CalendarsController do
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe 'GET #my_calendar' do
     it 'does not show the user edit page if user is not logged in' do
@@ -13,7 +13,7 @@ describe Public::CalendarsController do
     it 'shows the user edit page to logged in users' do
       login_user(user)
       get :my_calendar
-      response.should be_success
+      response.should be_successful
     end
   end
 

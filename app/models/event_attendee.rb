@@ -10,7 +10,7 @@
 #  reserve    :boolean          default(FALSE)
 #
 
-class EventAttendee < ActiveRecord::Base
+class EventAttendee < ApplicationRecord
 
   belongs_to :attendee_user, class_name: 'User', foreign_key: 'user_id'
   belongs_to :reserve_user, class_name: 'User', foreign_key: 'user_id'

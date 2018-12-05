@@ -36,7 +36,7 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
         .container
           .branding
             h2
-             = link_to sitename, root_path
+              = link_to sitename, root_path
         .nav-right
           .user
             = image_tag avatar_url(current_user)
@@ -45,6 +45,7 @@ body class="#{ @current_user ? '' : 'not-logged-in' }"
         .container
           = render 'shared/flash'
           = yield
+
     - else
       .container.not-logged-in
         = yield

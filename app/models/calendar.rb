@@ -10,7 +10,7 @@
 #  updated_at  :datetime         not null
 #
 
-class Calendar < ActiveRecord::Base
+class Calendar < ApplicationRecord
 
   #model associations
   has_many :events

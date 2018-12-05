@@ -1,5 +1,5 @@
 class MainController < ApplicationController
 
-  before_filter :authorize
-  
+  before_action :authorize
+
 end

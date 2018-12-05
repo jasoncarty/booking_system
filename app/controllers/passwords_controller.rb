@@ -14,12 +14,12 @@ class PasswordsController < ApplicationController
         @user.add_password_token
         @user.save
         flash[:notice] = "An email has been sent to you with instructions."
-        redirect_to :back
+        redirect_back(fallback_location: login_path)
         UserMailer.password_reset(@user, sitename).deliver_now
       end
     else
       flash[:alert] = "Email address not found in system"
-      redirect_to :back
+      redirect_back(fallback_location: login_path)
     end
   end
 
@@ -33,10 +33,10 @@ class PasswordsController < ApplicationController
       if params[:password] == params[:password_confirmation]
         @user.update(password: params[:password])
         flash[:notice] = 'Your password has been updated.'
-        redirect_to :back
+        redirect_back(fallback_location: login_path)
       else
         flash[:alert] = "Password does not match password confirmation."
-        redirect_to :back
+        redirect_back(fallback_location: login_path)
       end
     else
       flash[:alert] = "The token is invalid, please make a new request."
