@@ -1,4 +1,3 @@
-= react_component('admin/Event/components/EditEvent', { event: @event.as_json(:include => {:event_attendees => {:include => :user}})})
 h1 Edit Event
 = render 'shared/errors', model: @event
 = render 'form', event: @event
