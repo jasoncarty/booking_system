@@ -31,6 +31,10 @@ describe Event do
     event.event_attendees.where(event_id: event.id, user_id: new_user.id).first.reserve.should == false
   end
 
+  it 'does not throw error when removing a user' do
+    event.remove_user(user).should == nil
+  end
+
   it 'sets the first reserve to false if a no reserve is removed' do
     new_user = User.create(name: 'Test Testsson', email: 'test@testsson.com', password: 'password', confirmed_at: Time.now )
     event.event_attendees.create(user_id: user.id, event_id: event.id, reserve: false)
