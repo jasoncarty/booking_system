@@ -51,6 +51,7 @@ class Event < ApplicationRecord
   def remove_user user
     max = self.maximum_event_attendees
     attendee = self.event_attendees.where(user_id: user.id).first
+    return if !attendee
 
     if !attendee.reserve and self.reserves.size > 0
       self.rearrange_users
