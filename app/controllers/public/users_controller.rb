@@ -28,29 +28,27 @@ class Public::UsersController < PublicController
   def verification
     @user = User.find_by_verification_token(params[:verification_token])
     @token = params[:verification_token]
-    if @user
-      if @user.confirmed_at.present?
-        session[:user_id] = @user.id
-        redirect_to root_path
-        flash[:notice] = "Your account has already been verified"
-      else
 
-        if @user.update(user_params)
-          @user.confirmed_at = Time.now
-          @user.validate_password = false
-          @user.save
-          session[:user_id] = @user.id
-          redirect_to root_path
-          flash[:notice] = "Your account has now been verified"
-        else
-          @errors = @user.errors
-          render :verify
-        end
-      end
-    else
+    if !@user
       @error = 'Verification token is invalid'
       render :verify
+      return
     end
+
+    message = @user.confirmed_at.present? ?
+      "Your account has already been verified" :
+      "Your account has now been verified"
+
+    if @user.update(user_params)
+      @user.confirm
+      session[:user_id] = @user.id
+      redirect_to root_path
+      flash[:notice] = message
+    else
+      @errors = @user.errors
+      render :verify
+    end
+
   end
 
   private
