@@ -115,7 +115,20 @@ describe Public::UsersController do
         }
       }
       response.should redirect_to(root_path)
+      user.reload.confirmed.should == true
       flash[:notice].should == 'Your account has already been verified'
+    end
+
+    it 'sets user.confirmed to true' do
+      post :verification, params: {
+        verification_token: user.verification_token,
+        user: {
+          email: user.email,
+          password: 'password',
+          password_confirmation: 'password'
+        }
+      }
+      user.reload.confirmed.should == true
     end
   end
 

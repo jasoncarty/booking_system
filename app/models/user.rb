@@ -49,6 +49,14 @@ class User < ApplicationRecord
     end
   end
 
+  def confirm
+    return nil if self.confirmed
+    self.validate_password = false
+    self.confirmed = true
+    self.confirmed_at = Time.now
+    self.save
+  end
+
   def add_verify_token
     self.verification_token = generate_token
     self.verification_sent_at = Time.now
