@@ -18,7 +18,7 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'puma'
 
 # Assets
-gem 'bootstrap-sass', '~> 3.3.4'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem "font-awesome-rails"
 gem 'jquery-ui-rails'
 gem "select2-rails"
